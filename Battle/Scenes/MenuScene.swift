@@ -39,4 +39,8 @@ class MenuScene: SKScene {
         }
     }
     
+    deinit {
+        print("MenuScene deinit.")
+    }
+    
 }
