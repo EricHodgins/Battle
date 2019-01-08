@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
-		7AA2F54E21E422580002331B /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54D21E422580002331B /* Actions.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
 		7AA2F55221E422580002331B /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F55121E422580002331B /* GameViewController.swift */; };
 		7AA2F55521E422580002331B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F55321E422580002331B /* Main.storyboard */; };
 		7AA2F55721E422760002331B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F55621E422760002331B /* Assets.xcassets */; };
 		7AA2F55A21E422760002331B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F55821E422760002331B /* LaunchScreen.storyboard */; };
 		7AA2F56521E422770002331B /* BattleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F56421E422770002331B /* BattleTests.swift */; };
+		7AA2F57221E44C170002331B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57121E44C170002331B /* MenuScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +32,6 @@
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		7AA2F54D21E422580002331B /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		7AA2F54F21E422580002331B /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		7AA2F55121E422580002331B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		7AA2F55421E422580002331B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		7AA2F56021E422770002331B /* BattleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BattleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F56421E422770002331B /* BattleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleTests.swift; sourceTree = "<group>"; };
 		7AA2F56621E422770002331B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AA2F57121E44C170002331B /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				7AA2F54921E422580002331B /* AppDelegate.swift */,
-				7AA2F54B21E422580002331B /* GameScene.sks */,
-				7AA2F54D21E422580002331B /* Actions.sks */,
-				7AA2F54F21E422580002331B /* GameScene.swift */,
-				7AA2F55121E422580002331B /* GameViewController.swift */,
+				7AA2F57021E44B780002331B /* Controllers */,
+				7AA2F56F21E44B670002331B /* Scenes */,
 				7AA2F55321E422580002331B /* Main.storyboard */,
 				7AA2F55621E422760002331B /* Assets.xcassets */,
 				7AA2F55821E422760002331B /* LaunchScreen.storyboard */,
@@ -103,6 +101,24 @@
 				7AA2F56621E422770002331B /* Info.plist */,
 			);
 			path = BattleTests;
+			sourceTree = "<group>";
+		};
+		7AA2F56F21E44B670002331B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				7AA2F54B21E422580002331B /* GameScene.sks */,
+				7AA2F54F21E422580002331B /* GameScene.swift */,
+				7AA2F57121E44C170002331B /* MenuScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		7AA2F57021E44B780002331B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7AA2F55121E422580002331B /* GameViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,7 +206,6 @@
 				7AA2F54C21E422580002331B /* GameScene.sks in Resources */,
 				7AA2F55721E422760002331B /* Assets.xcassets in Resources */,
 				7AA2F55A21E422760002331B /* LaunchScreen.storyboard in Resources */,
-				7AA2F54E21E422580002331B /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AA2F55021E422580002331B /* GameScene.swift in Sources */,
+				7AA2F57221E44C170002331B /* MenuScene.swift in Sources */,
 				7AA2F55221E422580002331B /* GameViewController.swift in Sources */,
 				7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */,
 			);
