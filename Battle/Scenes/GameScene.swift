@@ -9,13 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-enum PhysicsCategory: UInt32 {
-    case boundary = 1
-    case tank = 2
-    case projectile = 4
-    case tracker = 8
-}
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var lastUpdateTime: TimeInterval!

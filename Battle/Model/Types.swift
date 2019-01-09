@@ -10,3 +10,10 @@ enum TankType: String {
     case friendly = "friendly"
     case enemy = "enemy"
 }
+
+enum PhysicsCategory: UInt32 {
+    case boundary = 1
+    case tank = 2
+    case projectile = 4
+    case turret = 8
+}
