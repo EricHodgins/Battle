@@ -12,6 +12,7 @@ class Tank: SKSpriteNode {
     var initialSize: CGSize = CGSize(width: 66, height: 45)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
     
+    var canShoot: Bool = true
     var direction: Direction = .idle
     public let movingSpeed: Double = 60
     
@@ -46,5 +47,35 @@ class Tank: SKSpriteNode {
         } else {
             self.position.x -= distanceToTravel
         }
+    }
+    
+    public func fireTowards(point: CGPoint, screenSize: CGSize) {
+        if canShoot {
+            udpateStateForJustFired()
+            fireStandardProjectile(point: point, screenSize: screenSize)
+        }
+    }
+    
+    private func udpateStateForJustFired() {
+        canShoot = true
+    }
+    
+    private func fireStandardProjectile(point: CGPoint, screenSize: CGSize) {
+        guard let gameScene = self.parent as? GameScene else { fatalError() }
+        
+        let projectile = Projectile()
+        let yPosition = position.y + (size.height/2) + 4
+        projectile.position = CGPoint(x: position.x, y: yPosition)
+        
+        let emissionAngle = MathHelper.calculateEmissionAngle(fromOrigin: CGPoint(x: self.position.x, y: yPosition), toPoint: point)
+        projectile.zRotation = .pi/2 - emissionAngle
+        
+        let pointOffScreen = MathHelper.trajectoryEndPoint(fromOrigin: self.position, toPoint: point, screenSize: screenSize)
+        let distance = MathHelper.trajectoryDistance(pointOffScreen: pointOffScreen, origin: self.position)
+        let duration = MathHelper.trajectoryDuration(distance: distance, speed: CGFloat(projectile.velocity))
+        
+        let projectileMoveTo = SKAction.move(to: pointOffScreen, duration: duration)
+        gameScene.addChild(projectile)
+        projectile.run(projectileMoveTo)
     }
 }

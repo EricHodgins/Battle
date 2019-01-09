@@ -9,17 +9,29 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+enum PhysicsCategory: UInt32 {
+    case boundary = 1
+    case tank = 2
+    case projectile = 4
+    case tracker = 8
+}
+
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var lastUpdateTime: TimeInterval!
     
     let tank = Tank()
     
     override func didMove(to view: SKView) {
+        backgroundColor = .black
+        self.physicsWorld.contactDelegate = self
+        
         lastUpdateTime = 0.0
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        self.physicsBody?.categoryBitMask = PhysicsCategory.boundary.rawValue
         
         tank.position = CGPoint(x: self.size.width/2, y: 100)
+        
         self.addChild(tank)
     }
     
@@ -34,19 +46,26 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let touchedPt = touch.location(in: self)
-            moveTank(touchingPoint: touchedPt)
+            if touchedPt.y >= 200 {
+                tank.fireTowards(point: touchedPt, screenSize: self.size)
+            } else {
+                moveTank(touchingPoint: touchedPt)
+            }
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let touchedPt = touch.location(in: self)
-            moveTank(touchingPoint: touchedPt)
+            if touchedPt.y <= 200 {
+                moveTank(touchingPoint: touchedPt)
+            }
         }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        self.view?.presentScene(MenuScene(size: self.size))
+        tank.direction = .idle
+        //self.view?.presentScene(MenuScene(size: self.size))
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -63,6 +82,28 @@ class GameScene: SKScene {
         tank.update(currentTime, timeDelta: timeDelta)
         
         lastUpdateTime = currentTime
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let otherBody: SKPhysicsBody
+        let projectileBody: SKPhysicsBody
+        let projectileMask = PhysicsCategory.projectile.rawValue
+        
+        if (contact.bodyA.categoryBitMask & projectileMask) > 0 {
+            otherBody = contact.bodyB
+            projectileBody = contact.bodyA
+        } else {
+            otherBody = contact.bodyA
+            projectileBody = contact.bodyB
+        }
+        
+        switch otherBody.categoryBitMask {
+        case PhysicsCategory.boundary.rawValue:
+            print("projectile hit boundary")
+            projectileBody.node?.removeFromParent()
+        default:
+            print("unknown contact hit")
+        }
     }
     
     deinit {

@@ -18,6 +18,8 @@
 		7AA2F57221E44C170002331B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57121E44C170002331B /* MenuScene.swift */; };
 		7AA2F57421E466D00002331B /* Tank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57321E466D00002331B /* Tank.swift */; };
 		7AA2F57721E5231B0002331B /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57621E5231B0002331B /* Direction.swift */; };
+		7AA2F57A21E52D160002331B /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57921E52D160002331B /* Projectile.swift */; };
+		7AA2F57C21E53B330002331B /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57B21E53B330002331B /* MathHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		7AA2F57121E44C170002331B /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		7AA2F57321E466D00002331B /* Tank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tank.swift; sourceTree = "<group>"; };
 		7AA2F57621E5231B0002331B /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		7AA2F57921E52D160002331B /* Projectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
+		7AA2F57B21E53B330002331B /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,15 +91,15 @@
 		7AA2F54821E422580002331B /* Battle */ = {
 			isa = PBXGroup;
 			children = (
-				7AA2F57521E522F90002331B /* Model */,
 				7AA2F54921E422580002331B /* AppDelegate.swift */,
+				7AA2F57521E522F90002331B /* Model */,
 				7AA2F57021E44B780002331B /* Controllers */,
 				7AA2F56F21E44B670002331B /* Scenes */,
+				7AA2F57821E52CD50002331B /* Nodes */,
 				7AA2F55321E422580002331B /* Main.storyboard */,
 				7AA2F55621E422760002331B /* Assets.xcassets */,
 				7AA2F55821E422760002331B /* LaunchScreen.storyboard */,
 				7AA2F55B21E422760002331B /* Info.plist */,
-				7AA2F57321E466D00002331B /* Tank.swift */,
 			);
 			path = Battle;
 			sourceTree = "<group>";
@@ -131,8 +135,18 @@
 			isa = PBXGroup;
 			children = (
 				7AA2F57621E5231B0002331B /* Direction.swift */,
+				7AA2F57B21E53B330002331B /* MathHelper.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7AA2F57821E52CD50002331B /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				7AA2F57321E466D00002331B /* Tank.swift */,
+				7AA2F57921E52D160002331B /* Projectile.swift */,
+			);
+			path = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +255,8 @@
 				7AA2F57221E44C170002331B /* MenuScene.swift in Sources */,
 				7AA2F57421E466D00002331B /* Tank.swift in Sources */,
 				7AA2F55221E422580002331B /* GameViewController.swift in Sources */,
+				7AA2F57A21E52D160002331B /* Projectile.swift in Sources */,
+				7AA2F57C21E53B330002331B /* MathHelper.swift in Sources */,
 				7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */,
 				7AA2F57721E5231B0002331B /* Direction.swift in Sources */,
 			);
