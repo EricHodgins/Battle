@@ -20,6 +20,9 @@
 		7AA2F57721E5231B0002331B /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57621E5231B0002331B /* Direction.swift */; };
 		7AA2F57A21E52D160002331B /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57921E52D160002331B /* Projectile.swift */; };
 		7AA2F57C21E53B330002331B /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57B21E53B330002331B /* MathHelper.swift */; };
+		7AA2F57E21E57F1E0002331B /* TankBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57D21E57F1E0002331B /* TankBuilder.swift */; };
+		7AA2F58021E57F4F0002331B /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57F21E57F4F0002331B /* Types.swift */; };
+		7AA2F58221E5819C0002331B /* GameDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F58121E5819C0002331B /* GameDirector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		7AA2F57621E5231B0002331B /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		7AA2F57921E52D160002331B /* Projectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
 		7AA2F57B21E53B330002331B /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
+		7AA2F57D21E57F1E0002331B /* TankBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankBuilder.swift; sourceTree = "<group>"; };
+		7AA2F57F21E57F4F0002331B /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		7AA2F58121E5819C0002331B /* GameDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDirector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +141,10 @@
 			isa = PBXGroup;
 			children = (
 				7AA2F57621E5231B0002331B /* Direction.swift */,
+				7AA2F57F21E57F4F0002331B /* Types.swift */,
 				7AA2F57B21E53B330002331B /* MathHelper.swift */,
+				7AA2F58121E5819C0002331B /* GameDirector.swift */,
+				7AA2F57D21E57F1E0002331B /* TankBuilder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -251,14 +260,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AA2F58221E5819C0002331B /* GameDirector.swift in Sources */,
 				7AA2F55021E422580002331B /* GameScene.swift in Sources */,
 				7AA2F57221E44C170002331B /* MenuScene.swift in Sources */,
 				7AA2F57421E466D00002331B /* Tank.swift in Sources */,
+				7AA2F58021E57F4F0002331B /* Types.swift in Sources */,
 				7AA2F55221E422580002331B /* GameViewController.swift in Sources */,
 				7AA2F57A21E52D160002331B /* Projectile.swift in Sources */,
 				7AA2F57C21E53B330002331B /* MathHelper.swift in Sources */,
 				7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */,
 				7AA2F57721E5231B0002331B /* Direction.swift in Sources */,
+				7AA2F57E21E57F1E0002331B /* TankBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

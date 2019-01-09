@@ -20,9 +20,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var lastUpdateTime: TimeInterval!
     
-    let tank = Tank()
+    var tank: Tank!
+    var enemy: Tank!
     
     override func didMove(to view: SKView) {
+        build()
         backgroundColor = .black
         self.physicsWorld.contactDelegate = self
         
@@ -30,9 +32,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.categoryBitMask = PhysicsCategory.boundary.rawValue
         
+    }
+    
+    private func build() {
+        let gameDirector = GameDirector()
+        tank = gameDirector.createHumanTank()
+        enemy = gameDirector.createComputerTank()
+        
         tank.position = CGPoint(x: self.size.width/2, y: 100)
+        enemy.position = CGPoint(x: self.size.width/2, y: self.size.height - 100)
+        enemy.zRotation += .pi
         
         self.addChild(tank)
+        self.addChild(enemy)
     }
     
     private func moveTank(touchingPoint: CGPoint) {
@@ -102,7 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("projectile hit boundary")
             projectileBody.node?.removeFromParent()
         default:
-            print("unknown contact hit")
+            print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
         }
     }
     

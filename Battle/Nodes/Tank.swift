@@ -16,8 +16,14 @@ class Tank: SKSpriteNode {
     var direction: Direction = .idle
     public let movingSpeed: Double = 60
     
-    init() {
-        let tankTexture = textureAtlas.textureNamed("friendly")
+    init(type: TankType) {
+        let tankTexture: SKTexture
+        if type == .friendly {
+            tankTexture = textureAtlas.textureNamed("friendly")
+        } else {
+            tankTexture = textureAtlas.textureNamed("enemy")
+        }
+    
         super.init(texture: tankTexture, color: .clear, size: initialSize)
         
         self.physicsBody = SKPhysicsBody(texture: tankTexture, size: self.size)
