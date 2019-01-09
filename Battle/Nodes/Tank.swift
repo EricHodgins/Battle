@@ -11,6 +11,7 @@ import SpriteKit
 class Tank: SKSpriteNode {
     var initialSize: CGSize = CGSize(width: 66, height: 45)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
+    let type: TankType!
     
     var canShoot: Bool = true
     var direction: Direction = .idle
@@ -19,6 +20,7 @@ class Tank: SKSpriteNode {
     var didFireAtPoint: Observable<CGPoint> = Observable(CGPoint.zero)
     
     init(type: TankType) {
+        self.type = type
         let tankTexture: SKTexture
         if type == .friendly {
             tankTexture = textureAtlas.textureNamed("friendly")
@@ -39,6 +41,7 @@ class Tank: SKSpriteNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        type = nil
         super.init(coder: aDecoder)
     }
     
@@ -66,14 +69,20 @@ class Tank: SKSpriteNode {
     }
     
     private func udpateStateForJustFired() {
-        canShoot = true
+        canShoot = false
     }
     
     private func fireStandardProjectile(point: CGPoint, screenSize: CGSize) {
         guard let gameScene = self.parent as? GameScene else { fatalError() }
         
         let projectile = Projectile()
-        let yPosition = position.y + (size.height/2) + 8
+        let yPosition: CGFloat
+        if type == .friendly {
+            yPosition = position.y + (size.height/2) + 8
+        } else {
+            yPosition = position.y - (size.height/2) - 8
+        }
+        
         projectile.position = CGPoint(x: position.x, y: yPosition)
         
         let emissionAngle = MathHelper.calculateEmissionAngle(fromOrigin: CGPoint(x: self.position.x, y: yPosition), toPoint: point)

@@ -24,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enemy: Tank!
     
     var tankAI: TankAI?
+    var level: Level!
     
     override func didMove(to view: SKView) {
         build()
@@ -37,6 +38,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func build() {
+        level = Level(gameScene: self)
+        
         let gameDirector = GameDirector()
         tank = gameDirector.createHumanTank()
         enemy = gameDirector.createComputerTank()

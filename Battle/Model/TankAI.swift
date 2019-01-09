@@ -38,11 +38,16 @@ class TankAI {
         }
     }
     
+    private func updateTankStates() {
+        computer.canShoot = false
+        human.canShoot = true
+    }
+    
     private func reactToHumanDidFire(atPoint point: CGPoint, from: CGPoint) {
         
         let xIntersect: CGFloat
         
-        //fire(computer, fireAtHuman: human)
+        fire(computer, fireAtHuman: human)
         
         if from.x < point.x {
             xIntersect = from.x + ((computer.position.y - from.y) / tan(MathHelper.angle(fromOrigin: from, toPoint: point)))
@@ -61,32 +66,33 @@ class TankAI {
         }
     }
     
-//    private func fire(_ computer: Tank, fireAtHuman human: Tank) {
-//        let delay = SKAction.wait(forDuration: randomDelayInSeconds())
-//        computer.run(delay) {
-//            computer.fireTowards(point: self.randomlyChoosenTargetPosition(), screenSize: self.gameScene.size)
-//            human.canShoot = true
-//        }
-//    }
+    private func fire(_ computer: Tank, fireAtHuman human: Tank) {
+        let delay = SKAction.wait(forDuration: randomDelayInSeconds())
+        computer.run(delay) { [unowned self] in
+            computer.fireTowards(point: self.randomlyChoosenTargetPosition(), screenSize: self.gameScene.size)
+            self.updateTankStates()
+        }
+    }
     
     // up to 6.5 second delay
-//    private func randomDelayInSeconds() -> Double {
-//        let randomSource = GKRandomSource.sharedRandom()
-//        let randomSeconds = Float(randomSource.nextInt(upperBound: 6)) * randomSource.nextUniform() + 3.0
-//        return Double(randomSeconds)
-//    }
+    private func randomDelayInSeconds() -> Double {
+        let randomSource = GKRandomSource.sharedRandom()
+        let randomSeconds = Float(randomSource.nextInt(upperBound: 6)) * randomSource.nextUniform() + 3.0
+        return Double(randomSeconds)
+    }
     
-//    private func randomlyChoosenTargetPosition() -> CGPoint {
-//        let targets = getTargetPositions()
-//        let randomSource = GKRandomSource.sharedRandom()
-//        let shuffledTargets = randomSource.arrayByShufflingObjects(in: targets)
-//        let targetPosition = shuffledTargets[0]
-//        return targetPosition as! CGPoint
-//    }
+    private func randomlyChoosenTargetPosition() -> CGPoint {
+        let targets = getTargetPositions()
+        let randomSource = GKRandomSource.sharedRandom()
+        let shuffledTargets = randomSource.arrayByShufflingObjects(in: targets)
+        let targetPosition = shuffledTargets[0]
+        return targetPosition as! CGPoint
+    }
     
-//    private func getTargetPositions() -> [CGPoint] {
-//        guard let level = self.gameScene.level else { fatalError("No level obstacles found.") }
-//        var targets: [CGPoint] = []
+    private func getTargetPositions() -> [CGPoint] {
+        guard let level = self.gameScene.level else { fatalError("No level was found grom gameScene.") }
+        
+        var targets: [CGPoint] = []
 //        for target in level.getAllObstacles() {
 //            targets.append(target.position)
 //        }
@@ -94,9 +100,9 @@ class TankAI {
 //        for powerup in level.getAllPowerUps() {
 //            targets.append(powerup.position)
 //        }
-//
-//        targets.append(self.gameScene.paddle.position)
-//
-//        return targets
-//    }
+
+        targets.append(human.position)
+
+        return targets
+    }
 }
