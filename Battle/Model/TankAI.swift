@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit.GKRandomSource
 
 class TankAI {
-    private let gameScene: GameScene
+    weak private var gameScene: GameScene!
     private let human: Tank!
     private let computer: Tank!
     
@@ -68,7 +68,7 @@ class TankAI {
     
     private func fire(_ computer: Tank, fireAtHuman human: Tank) {
         let delay = SKAction.wait(forDuration: randomDelayInSeconds())
-        computer.run(delay) { [unowned self] in
+        computer.run(delay) { [unowned self, unowned computer] in
             computer.fireTowards(point: self.randomlyChoosenTargetPosition(), screenSize: self.gameScene.size)
             self.updateTankStates()
         }

@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit.GKRandomSource
 
 class Level {
-    let gameScene: GameScene
+    weak var gameScene: GameScene?
     
     init(gameScene: GameScene) {
         self.gameScene = gameScene

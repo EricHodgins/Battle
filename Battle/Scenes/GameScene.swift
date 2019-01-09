@@ -19,11 +19,11 @@ enum PhysicsCategory: UInt32 {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var lastUpdateTime: TimeInterval!
-    
+    let gameDirector: GameDirector = GameDirector()
     var tank: Tank!
     var enemy: Tank!
     
-    var tankAI: TankAI?
+    var tankAI: TankAI? = nil
     var level: Level!
     
     override func didMove(to view: SKView) {
@@ -40,7 +40,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func build() {
         level = Level(gameScene: self)
         
-        let gameDirector = GameDirector()
         tank = gameDirector.createHumanTank()
         enemy = gameDirector.createComputerTank()
         
@@ -84,7 +83,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func touchUp(atPoint pos : CGPoint) {
         tank.direction = .idle
-        //self.view?.presentScene(MenuScene(size: self.size))
+        goToMenuScene()
+    }
+    
+    private func goToMenuScene() {
+        self.view?.presentScene(MenuScene(size: self.size))
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -92,15 +95,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if lastUpdateTime == 0.0 {
-            lastUpdateTime = currentTime
-        }
-        
-        let timeDelta = currentTime - lastUpdateTime
-        
-        tank.update(currentTime, timeDelta: timeDelta)
-        
-        lastUpdateTime = currentTime
+//        if lastUpdateTime == 0.0 {
+//            lastUpdateTime = currentTime
+//        }
+//
+//        let timeDelta = currentTime - lastUpdateTime
+//
+//        tank.update(currentTime, timeDelta: timeDelta)
+//
+//        lastUpdateTime = currentTime
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
