@@ -12,6 +12,7 @@ class Projectile: SKSpriteNode {
     var initialSize: CGSize = CGSize(width: 4, height: 11)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
     public var velocity: Double = 100
+    public var shooter: Shooter = .friendly
     
     init() {
         let tankTexture = textureAtlas.textureNamed("projectile")

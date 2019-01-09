@@ -105,4 +105,17 @@ class TankAI {
 
         return targets
     }
+    
+    public func setupTurretsObserver() {
+        guard let level = gameScene.level else { fatalError() }
+        
+        let turrets = level.getTurrets()
+        for turret in turrets {
+            turret.wasHit.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self] (target, _) in
+                if target.shooter == .friendly {
+                    self.reactToHumanDidFire(atPoint: self.computer.position, from: turret.position)
+                }
+            }
+        }
+    }
 }

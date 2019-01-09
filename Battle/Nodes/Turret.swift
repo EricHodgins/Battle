@@ -13,6 +13,8 @@ class Turret: SKSpriteNode {
     var initialSize: CGSize = CGSize(width: 28, height: 24)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Turret")
     
+    public var wasHit: Observable<Target> = Observable(Target(shooter: .friendly, wasHit: false))
+    
     init() {
         let turretTexture = textureAtlas.textureNamed("turret")
         super.init(texture: turretTexture, color: .clear, size: initialSize)

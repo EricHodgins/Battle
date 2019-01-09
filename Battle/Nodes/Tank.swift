@@ -76,10 +76,13 @@ class Tank: SKSpriteNode {
         guard let gameScene = self.parent as? GameScene else { fatalError() }
         
         let projectile = Projectile()
+        
         let yPosition: CGFloat
         if type == .friendly {
+            projectile.shooter = .friendly
             yPosition = position.y + (size.height/2) + 8
         } else {
+            projectile.shooter = .enemy
             yPosition = position.y - (size.height/2) - 8
         }
         

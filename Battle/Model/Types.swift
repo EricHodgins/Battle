@@ -17,3 +17,13 @@ enum PhysicsCategory: UInt32 {
     case projectile = 4
     case turret = 8
 }
+
+enum Shooter {
+    case friendly
+    case enemy
+}
+
+struct Target {
+    var shooter: Shooter
+    var wasHit: Bool
+}

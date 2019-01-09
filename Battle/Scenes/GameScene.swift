@@ -41,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.zRotation += .pi
         
         tankAI = TankAI(gameScene: self)
+        tankAI?.setupTurretsObserver()
         
         self.addChild(tank)
         self.addChild(enemy)
@@ -76,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func touchUp(atPoint pos : CGPoint) {
         tank.direction = .idle
-        goToMenuScene()
+        //goToMenuScene()
     }
     
     private func goToMenuScene() {
@@ -88,15 +89,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-//        if lastUpdateTime == 0.0 {
-//            lastUpdateTime = currentTime
-//        }
-//
-//        let timeDelta = currentTime - lastUpdateTime
-//
-//        tank.update(currentTime, timeDelta: timeDelta)
-//
-//        lastUpdateTime = currentTime
+        if lastUpdateTime == 0.0 {
+            lastUpdateTime = currentTime
+        }
+
+        let timeDelta = currentTime - lastUpdateTime
+
+        tank.update(currentTime, timeDelta: timeDelta)
+
+        lastUpdateTime = currentTime
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -112,15 +113,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             projectileBody = contact.bodyB
         }
         
-        switch otherBody.categoryBitMask {
-        case PhysicsCategory.boundary.rawValue:
-            print("projectile hit boundary")
-            projectileBody.node?.removeFromParent()
-        case PhysicsCategory.tank.rawValue:
-            print("projectile hit tank")
-            projectileBody.node?.removeFromParent()
-        default:
-            print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
+        if let projectile = projectileBody.node as? Projectile {
+            switch otherBody.categoryBitMask {
+            case PhysicsCategory.boundary.rawValue:
+                print("projectile hit boundary")
+                projectile.removeFromParent()
+            case PhysicsCategory.tank.rawValue:
+                print("projectile hit tank")
+                projectile.removeFromParent()
+            case PhysicsCategory.turret.rawValue:
+                print("projectile hit turret")
+                let shooter = projectile.shooter
+                projectile.removeFromParent()
+                if let turret = otherBody.node as? Turret {
+                    turret.wasHit.value = Target(shooter: shooter, wasHit: true)
+                }
+            default:
+                print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
+            }
         }
     }
     
