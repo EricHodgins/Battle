@@ -23,6 +23,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var tank: Tank!
     var enemy: Tank!
     
+    var tankAI: TankAI?
+    
     override func didMove(to view: SKView) {
         build()
         backgroundColor = .black
@@ -42,6 +44,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tank.position = CGPoint(x: self.size.width/2, y: 100)
         enemy.position = CGPoint(x: self.size.width/2, y: self.size.height - 100)
         enemy.zRotation += .pi
+        
+        tankAI = TankAI(gameScene: self)
         
         self.addChild(tank)
         self.addChild(enemy)
@@ -112,6 +116,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch otherBody.categoryBitMask {
         case PhysicsCategory.boundary.rawValue:
             print("projectile hit boundary")
+            projectileBody.node?.removeFromParent()
+        case PhysicsCategory.tank.rawValue:
+            print("projectile hit tank")
             projectileBody.node?.removeFromParent()
         default:
             print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")

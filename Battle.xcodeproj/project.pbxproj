@@ -23,6 +23,8 @@
 		7AA2F57E21E57F1E0002331B /* TankBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57D21E57F1E0002331B /* TankBuilder.swift */; };
 		7AA2F58021E57F4F0002331B /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F57F21E57F4F0002331B /* Types.swift */; };
 		7AA2F58221E5819C0002331B /* GameDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F58121E5819C0002331B /* GameDirector.swift */; };
+		7AA2F58421E5AFCD0002331B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F58321E5AFCD0002331B /* Observable.swift */; };
+		7AA2F58621E5B01C0002331B /* TankAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F58521E5B01C0002331B /* TankAI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		7AA2F57D21E57F1E0002331B /* TankBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankBuilder.swift; sourceTree = "<group>"; };
 		7AA2F57F21E57F4F0002331B /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		7AA2F58121E5819C0002331B /* GameDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDirector.swift; sourceTree = "<group>"; };
+		7AA2F58321E5AFCD0002331B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		7AA2F58521E5B01C0002331B /* TankAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankAI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,8 @@
 				7AA2F57B21E53B330002331B /* MathHelper.swift */,
 				7AA2F58121E5819C0002331B /* GameDirector.swift */,
 				7AA2F57D21E57F1E0002331B /* TankBuilder.swift */,
+				7AA2F58521E5B01C0002331B /* TankAI.swift */,
+				7AA2F58321E5AFCD0002331B /* Observable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,6 +270,8 @@
 				7AA2F55021E422580002331B /* GameScene.swift in Sources */,
 				7AA2F57221E44C170002331B /* MenuScene.swift in Sources */,
 				7AA2F57421E466D00002331B /* Tank.swift in Sources */,
+				7AA2F58421E5AFCD0002331B /* Observable.swift in Sources */,
+				7AA2F58621E5B01C0002331B /* TankAI.swift in Sources */,
 				7AA2F58021E57F4F0002331B /* Types.swift in Sources */,
 				7AA2F55221E422580002331B /* GameViewController.swift in Sources */,
 				7AA2F57A21E52D160002331B /* Projectile.swift in Sources */,

@@ -16,6 +16,8 @@ class Tank: SKSpriteNode {
     var direction: Direction = .idle
     public let movingSpeed: Double = 60
     
+    var didFireAtPoint: Observable<CGPoint> = Observable(CGPoint.zero)
+    
     init(type: TankType) {
         let tankTexture: SKTexture
         if type == .friendly {
@@ -27,6 +29,7 @@ class Tank: SKSpriteNode {
         super.init(texture: tankTexture, color: .clear, size: initialSize)
         
         self.physicsBody = SKPhysicsBody(texture: tankTexture, size: self.size)
+        self.physicsBody?.categoryBitMask = PhysicsCategory.tank.rawValue
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.mass = 10000000
         self.physicsBody?.linearDamping = 1.0
@@ -70,18 +73,36 @@ class Tank: SKSpriteNode {
         guard let gameScene = self.parent as? GameScene else { fatalError() }
         
         let projectile = Projectile()
-        let yPosition = position.y + (size.height/2) + 4
+        let yPosition = position.y + (size.height/2) + 8
         projectile.position = CGPoint(x: position.x, y: yPosition)
         
         let emissionAngle = MathHelper.calculateEmissionAngle(fromOrigin: CGPoint(x: self.position.x, y: yPosition), toPoint: point)
         projectile.zRotation = .pi/2 - emissionAngle
         
         let pointOffScreen = MathHelper.trajectoryEndPoint(fromOrigin: self.position, toPoint: point, screenSize: screenSize)
+        
+        // Observable For AI
+        didFireAtPoint.value = pointOffScreen
+        
         let distance = MathHelper.trajectoryDistance(pointOffScreen: pointOffScreen, origin: self.position)
         let duration = MathHelper.trajectoryDuration(distance: distance, speed: CGFloat(projectile.velocity))
         
         let projectileMoveTo = SKAction.move(to: pointOffScreen, duration: duration)
         gameScene.addChild(projectile)
         projectile.run(projectileMoveTo)
+    }
+}
+
+extension Tank {
+    public func moveTo(point: CGPoint) {
+        let distance = abs(self.position.x - point.x)
+        let duration = Double(distance) / Double(movingSpeed)
+        let moveAction = SKAction.move(to: point, duration: duration)
+        self.run(moveAction)
+    }
+    
+    public func firingPoint() -> CGPoint {
+        let yPosition = position.y + (size.height/2) + 8
+        return CGPoint(x: self.position.x, y: yPosition)
     }
 }

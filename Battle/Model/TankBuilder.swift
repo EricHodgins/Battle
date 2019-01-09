@@ -11,6 +11,7 @@ import SpriteKit
 class TankBuilder {
     private var type: TankType = .friendly
     
+    
     public func addType(_ type: TankType) {
         self.type = type
     }
