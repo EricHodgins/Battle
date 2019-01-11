@@ -51,4 +51,10 @@ class Level {
         let randomX = CGFloat((Float(randomSource.nextInt(upperBound: maxX - minX))) + Float(minX))
         return randomX
     }
+    
+    public func update(_ currentTime: TimeInterval, timeDelta: TimeInterval) {
+        for turret in turrets {
+            turret.update(currentTime, timeDelta: timeDelta)
+        }
+    }
 }

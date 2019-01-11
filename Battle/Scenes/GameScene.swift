@@ -96,7 +96,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let timeDelta = currentTime - lastUpdateTime
 
         tank.update(currentTime, timeDelta: timeDelta)
-
+        level.update(currentTime, timeDelta: timeDelta)
+        
         lastUpdateTime = currentTime
     }
     
@@ -116,22 +117,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let projectile = projectileBody.node as? Projectile {
             switch otherBody.categoryBitMask {
             case PhysicsCategory.boundary.rawValue:
-                print("projectile hit boundary")
                 projectile.removeFromParent()
             case PhysicsCategory.tank.rawValue:
-                print("projectile hit tank")
                 projectile.removeFromParent()
             case PhysicsCategory.turret.rawValue:
-                print("projectile hit turret")
                 let shooter = projectile.shooter
                 projectile.removeFromParent()
                 if let turret = otherBody.node as? Turret {
-                    turret.wasHit.value = Target(shooter: shooter, wasHit: true)
+                    turretHitSequence(turret: turret, shooter: shooter)
                 }
             default:
                 print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
             }
         }
+    }
+    
+    private func turretHitSequence(turret: Turret, shooter: Shooter) {
+        //turret.wasHit.value = Target(shooter: shooter, wasHit: true)
+        
+        if shooter == .friendly {
+            turret.aimAt(self.enemy)
+        } else {
+            turret.aimAt(self.tank)
+        }
+//        let newProjectile = Projectile()
+//        newProjectile.velocity *= 2
+//        newProjectile.shooter = shooter
+//
+//        let delay = SKAction.wait(forDuration: 3)
+//        let fire = SKAction.run {
+//            var goToPt = CGPoint.zero
+//            if shooter == .friendly {
+//                goToPt = self.enemy.position
+//            } else {
+//                goToPt = self.tank.position
+//            }
+//        }
     }
     
     deinit {

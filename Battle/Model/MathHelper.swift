@@ -54,6 +54,13 @@ class MathHelper {
         return angle
     }
     
+    static func rotationAngle(fromOrigin origin: CGPoint, toPoint: CGPoint) -> CGFloat {
+        let dy = toPoint.y - origin.y
+        let dx = toPoint.x - origin.x
+        let angle = atan2(dy, dx) - (.pi/2)
+        return angle
+    }
+    
     // Radians
     static func calculateEmissionAngle(fromOrigin origin: CGPoint, toPoint: CGPoint) -> CGFloat {
         var angle = MathHelper.angle(fromOrigin: origin, toPoint: toPoint)

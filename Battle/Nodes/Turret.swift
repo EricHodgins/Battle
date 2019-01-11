@@ -10,8 +10,17 @@ import SpriteKit
 
 class Turret: SKSpriteNode {
     
+    enum RotateDirection {
+        case left
+        case right
+    }
+    
     var initialSize: CGSize = CGSize(width: 28, height: 24)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Turret")
+    
+    var rotationSpeed: CGFloat = 0.01 // (rad / s )
+    var firingDelay: Double = 3
+    var currentTarget: Tank? = nil
     
     public var wasHit: Observable<Target> = Observable(Target(shooter: .friendly, wasHit: false))
     
@@ -31,5 +40,83 @@ class Turret: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    public func aimAt(_ target: Tank) {
+        self.currentTarget = target
+//        let angle = MathHelper.rotationAngle(fromOrigin: self.position, toPoint: point)
+//        let rotateAction = SKAction.rotate(toAngle: angle, duration: 3, shortestUnitArc: true)
+//        self.run(rotateAction)
+    }
+    
+    public func update(_ currentTime: TimeInterval, timeDelta: TimeInterval) {
+        guard let target = currentTarget else { return }
+        
+        var targetAngle = MathHelper.rotationAngle(fromOrigin: self.position, toPoint: target.position)
+        
+        targetAngle = normalizeAngle(targetAngle)
+        zRotation = normalizeAngle(zRotation)
+        
+        // Dist. to Right (counter clockwise)
+//        var radRight = abs(-targetAngle - zRotation)
+//        var radLeft = abs(targetAngle - zRotation)
+//
+//        if radRight > (2 * .pi) {
+//            radRight -= (2 * .pi)
+//        }
+//
+//        if radLeft > (2 * .pi) {
+//            radLeft -= (2 * .pi)
+//        }
+        let diff = targetAngle - zRotation
+        if diff >= 0 {
+            if abs(diff) < .pi {
+                rotateLeft(toTarget: targetAngle)
+            } else {
+                rotateRight(toTarget: targetAngle)
+            }
+        } else {
+            if abs(diff) < .pi {
+                rotateRight(toTarget: targetAngle)
+            } else {
+                rotateLeft(toTarget: targetAngle)
+            }
+        }
+    }
+    
+    private func rotateLeft(toTarget target: CGFloat) {
+        zRotation += rotationSpeed
+        let diff = abs(zRotation - target)
+        if diff > (.pi / 2) { return }
+        //if target > zRotation { return }
+        if zRotation >= target {
+            zRotation = target
+        }
+    }
+    
+    private func rotateRight(toTarget target: CGFloat) {
+        zRotation -= rotationSpeed
+        let diff = abs(zRotation - target)
+        if diff > (.pi / 2) { return }
+        //if target < zRotation { return }
+        if zRotation <= target {
+            zRotation = target
+        }
+    }
+    
+    private func normalizeAngle(_ angle: CGFloat) -> CGFloat {
+        let two_pi: CGFloat = 2 * .pi
+        var normalized_angle: CGFloat = angle
+        if angle > two_pi {
+            normalized_angle = angle - two_pi
+        } else if angle < -two_pi {
+            normalized_angle = angle + two_pi
+        }
+        
+        if normalized_angle < 0 {
+            normalized_angle += (2 * .pi)
+        }
+        
+        return normalized_angle
     }
 }
