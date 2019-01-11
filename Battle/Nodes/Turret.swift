@@ -18,7 +18,7 @@ class Turret: SKSpriteNode {
     var initialSize: CGSize = CGSize(width: 28, height: 24)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Turret")
     
-    var rotationSpeed: CGFloat = 0.01 // (rad / s )
+    var rotationSpeed: CGFloat = 0.01 // (rad / sec )
     var firingDelay: Double = 3
     var currentTarget: Tank? = nil
     
@@ -44,9 +44,6 @@ class Turret: SKSpriteNode {
     
     public func aimAt(_ target: Tank) {
         self.currentTarget = target
-//        let angle = MathHelper.rotationAngle(fromOrigin: self.position, toPoint: point)
-//        let rotateAction = SKAction.rotate(toAngle: angle, duration: 3, shortestUnitArc: true)
-//        self.run(rotateAction)
     }
     
     public func update(_ currentTime: TimeInterval, timeDelta: TimeInterval) {
@@ -56,18 +53,7 @@ class Turret: SKSpriteNode {
         
         targetAngle = normalizeAngle(targetAngle)
         zRotation = normalizeAngle(zRotation)
-        
-        // Dist. to Right (counter clockwise)
-//        var radRight = abs(-targetAngle - zRotation)
-//        var radLeft = abs(targetAngle - zRotation)
-//
-//        if radRight > (2 * .pi) {
-//            radRight -= (2 * .pi)
-//        }
-//
-//        if radLeft > (2 * .pi) {
-//            radLeft -= (2 * .pi)
-//        }
+
         let diff = targetAngle - zRotation
         if diff >= 0 {
             if abs(diff) < .pi {
@@ -88,7 +74,6 @@ class Turret: SKSpriteNode {
         zRotation += rotationSpeed
         let diff = abs(zRotation - target)
         if diff > (.pi / 2) { return }
-        //if target > zRotation { return }
         if zRotation >= target {
             zRotation = target
         }
@@ -98,7 +83,6 @@ class Turret: SKSpriteNode {
         zRotation -= rotationSpeed
         let diff = abs(zRotation - target)
         if diff > (.pi / 2) { return }
-        //if target < zRotation { return }
         if zRotation <= target {
             zRotation = target
         }
