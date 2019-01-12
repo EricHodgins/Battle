@@ -134,25 +134,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func turretHitSequence(turret: Turret, shooter: Shooter) {
         //turret.wasHit.value = Target(shooter: shooter, wasHit: true)
-        
+
         if shooter == .friendly {
-            turret.aimAt(self.enemy)
+            turret.aimAt(self.enemy) { [unowned self] in
+                self.turretFire(turret: turret, target: self.enemy, shooter: shooter)
+            }
         } else {
-            turret.aimAt(self.tank)
+            turret.aimAt(self.tank) { [unowned self] in
+                self.turretFire(turret: turret, target: self.tank, shooter: shooter)
+            }
         }
-//        let newProjectile = Projectile()
-//        newProjectile.velocity *= 2
-//        newProjectile.shooter = shooter
-//
-//        let delay = SKAction.wait(forDuration: 3)
-//        let fire = SKAction.run {
-//            var goToPt = CGPoint.zero
-//            if shooter == .friendly {
-//                goToPt = self.enemy.position
-//            } else {
-//                goToPt = self.tank.position
-//            }
-//        }
+    }
+    
+    private func turretFire(turret: Turret, target: Tank, shooter: Shooter) {
+        let newProjectile = Projectile()
+        newProjectile.zRotation = turret.zRotation
+        newProjectile.velocity *= 2
+        newProjectile.shooter = shooter
+        
+        let startPt = turret.convert(CGPoint(x: 0, y: 25), to: self)
+        let endPt = MathHelper.trajectoryEndPoint(fromOrigin: startPt, toPoint: target.position, screenSize: self.size)
+        let distance = MathHelper.trajectoryDistance(pointOffScreen: endPt, origin: startPt)
+        let duration = MathHelper.trajectoryDuration(distance: distance, speed: CGFloat(newProjectile.velocity))
+        let moveAction = SKAction.move(to: endPt, duration: duration)
+        
+        newProjectile.position = startPt
+        self.addChild(newProjectile)
+        
+        newProjectile.run(moveAction)
     }
     
     deinit {

@@ -21,6 +21,8 @@ class Turret: SKSpriteNode {
     var rotationSpeed: CGFloat = 0.01 // (rad / sec )
     var firingDelay: Double = 3
     var currentTarget: Tank? = nil
+    private var canFire: Bool = false
+    private var targetAcquiredHandler: (() -> Void)? = nil
     
     public var wasHit: Observable<Target> = Observable(Target(shooter: .friendly, wasHit: false))
     
@@ -42,8 +44,10 @@ class Turret: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    public func aimAt(_ target: Tank) {
+    public func aimAt(_ target: Tank, completion: @escaping (() -> Void)) {
+        self.canFire = true
         self.currentTarget = target
+        self.targetAcquiredHandler = completion
     }
     
     public func update(_ currentTime: TimeInterval, timeDelta: TimeInterval) {
@@ -76,6 +80,7 @@ class Turret: SKSpriteNode {
         if diff > (.pi / 2) { return }
         if zRotation >= target {
             zRotation = target
+            hasRotatedToTarget()
         }
     }
     
@@ -85,6 +90,7 @@ class Turret: SKSpriteNode {
         if diff > (.pi / 2) { return }
         if zRotation <= target {
             zRotation = target
+            hasRotatedToTarget()
         }
     }
     
@@ -102,5 +108,12 @@ class Turret: SKSpriteNode {
         }
         
         return normalized_angle
+    }
+    
+    private func hasRotatedToTarget() {
+        guard canFire else { return }
+        guard let targetAcquiredHandler = targetAcquiredHandler else { return }
+        canFire = false
+        targetAcquiredHandler()
     }
 }
