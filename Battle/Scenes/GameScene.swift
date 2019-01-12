@@ -77,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func touchUp(atPoint pos : CGPoint) {
         tank.direction = .idle
-        //goToMenuScene()
+        goToMenuScene()
     }
     
     private func goToMenuScene() {
@@ -136,11 +136,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //turret.wasHit.value = Target(shooter: shooter, wasHit: true)
 
         if shooter == .friendly {
-            turret.aimAt(self.enemy) { [unowned self] in
+            turret.aimAt(self.enemy) { [unowned self, unowned turret] in
                 self.turretFire(turret: turret, target: self.enemy, shooter: shooter)
             }
         } else {
-            turret.aimAt(self.tank) { [unowned self] in
+            turret.aimAt(self.tank) { [unowned self, unowned turret] in
                 self.turretFire(turret: turret, target: self.tank, shooter: shooter)
             }
         }

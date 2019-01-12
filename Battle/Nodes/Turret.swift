@@ -116,4 +116,8 @@ class Turret: SKSpriteNode {
         canFire = false
         targetAcquiredHandler()
     }
+    
+    deinit {
+        print("Turret Deinit")
+    }
 }

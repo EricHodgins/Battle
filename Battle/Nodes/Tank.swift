@@ -103,6 +103,10 @@ class Tank: SKSpriteNode {
         gameScene.addChild(projectile)
         projectile.run(projectileMoveTo)
     }
+    
+    deinit {
+        print("Tank Deinit: \(String(describing: self.name))")
+    }
 }
 
 extension Tank {

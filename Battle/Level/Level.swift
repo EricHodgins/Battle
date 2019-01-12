@@ -57,4 +57,8 @@ class Level {
             turret.update(currentTime, timeDelta: timeDelta)
         }
     }
+    
+    deinit {
+        print("Level Deinit")
+    }
 }

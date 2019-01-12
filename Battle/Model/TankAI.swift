@@ -111,7 +111,7 @@ class TankAI {
         
         let turrets = level.getTurrets()
         for turret in turrets {
-            turret.wasHit.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self] (target, _) in
+            turret.wasHit.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self, unowned turret] (target, _) in
                 if target.shooter == .friendly {
                     self.reactToHumanDidFire(atPoint: self.computer.position, from: turret.position)
                 }

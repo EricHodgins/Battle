@@ -33,5 +33,8 @@ class Projectile: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
+    deinit {
+        print("Projectile Deinit")
+    }
     
 }
