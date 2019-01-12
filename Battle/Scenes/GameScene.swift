@@ -156,12 +156,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let endPt = MathHelper.trajectoryEndPoint(fromOrigin: startPt, toPoint: target.position, screenSize: self.size)
         let distance = MathHelper.trajectoryDistance(pointOffScreen: endPt, origin: startPt)
         let duration = MathHelper.trajectoryDuration(distance: distance, speed: CGFloat(newProjectile.velocity))
-        let moveAction = SKAction.move(to: endPt, duration: duration)
         
-        newProjectile.position = startPt
-        self.addChild(newProjectile)
+        let fireDelay = SKAction.wait(forDuration: turret.firingDelay)
+        let fireProjectile = SKAction.run { // self, turret already unowned
+            self.addChild(newProjectile)
+            newProjectile.position = startPt
+            let moveAction = SKAction.move(to: endPt, duration: duration)
+            newProjectile.run(moveAction)
+        }
         
-        newProjectile.run(moveAction)
+        let sequence = SKAction.sequence([
+            fireDelay,
+            fireProjectile,
+        ])
+        
+        self.run(sequence)
     }
     
     deinit {

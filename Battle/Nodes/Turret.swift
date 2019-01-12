@@ -18,9 +18,10 @@ class Turret: SKSpriteNode {
     var initialSize: CGSize = CGSize(width: 28, height: 24)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Turret")
     
-    var rotationSpeed: CGFloat = 0.01 // (rad / sec )
-    var firingDelay: Double = 3
-    var currentTarget: Tank? = nil
+    public var rotationSpeed: CGFloat = 0.01 // (rad / sec )
+    public var firingDelay: Double = 1.0
+    
+    private var currentTarget: Tank? = nil
     private var canFire: Bool = false
     private var targetAcquiredHandler: (() -> Void)? = nil
     
