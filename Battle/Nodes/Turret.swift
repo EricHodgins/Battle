@@ -25,7 +25,7 @@ class Turret: SKSpriteNode {
     private var canFire: Bool = false
     private var targetAcquiredHandler: (() -> Void)? = nil
     
-    public var wasHit: Observable<Target> = Observable(Target(shooter: .friendly, wasHit: false))
+    public var didFire: Observable<Target> = Observable(Target(shooter: .friendly, wasHit: false))
     
     init() {
         let turretTexture = textureAtlas.textureNamed("turret")
@@ -115,6 +115,7 @@ class Turret: SKSpriteNode {
         guard canFire else { return }
         guard let targetAcquiredHandler = targetAcquiredHandler else { return }
         canFire = false
+        currentTarget = nil
         targetAcquiredHandler()
     }
     

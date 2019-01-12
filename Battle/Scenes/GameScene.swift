@@ -133,8 +133,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func turretHitSequence(turret: Turret, shooter: Shooter) {
-        //turret.wasHit.value = Target(shooter: shooter, wasHit: true)
-
         if shooter == .friendly {
             turret.aimAt(self.enemy) { [unowned self, unowned turret] in
                 self.turretFire(turret: turret, target: self.enemy, shooter: shooter)
@@ -159,6 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let fireDelay = SKAction.wait(forDuration: turret.firingDelay)
         let fireProjectile = SKAction.run { // self, turret already unowned
+            turret.didFire.value = Target(shooter: shooter, wasHit: true)
             self.addChild(newProjectile)
             newProjectile.position = startPt
             let moveAction = SKAction.move(to: endPt, duration: duration)
