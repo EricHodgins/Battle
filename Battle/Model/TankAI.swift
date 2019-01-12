@@ -93,10 +93,10 @@ class TankAI {
         guard let level = self.gameScene.level else { fatalError("No level was found grom gameScene.") }
         
         var targets: [CGPoint] = []
-//        for target in level.getAllObstacles() {
-//            targets.append(target.position)
-//        }
-//
+        for target in level.getTurrets() {
+            targets.append(target.position)
+        }
+
 //        for powerup in level.getAllPowerUps() {
 //            targets.append(powerup.position)
 //        }

@@ -77,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func touchUp(atPoint pos : CGPoint) {
         tank.direction = .idle
-        goToMenuScene()
+        //goToMenuScene()
     }
     
     private func goToMenuScene() {

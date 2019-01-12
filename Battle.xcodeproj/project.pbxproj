@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A32292921EA728A00BA4165 /* ShotFired.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A32292821EA728A00BA4165 /* ShotFired.sks */; };
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A32292821EA728A00BA4165 /* ShotFired.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ShotFired.sks; sourceTree = "<group>"; };
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A32292721EA726D00BA4165 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7A32292821EA728A00BA4165 /* ShotFired.sks */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		7AA2F53D21E422580002331B = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +117,7 @@
 		7AA2F54821E422580002331B /* Battle */ = {
 			isa = PBXGroup;
 			children = (
+				7A32292721EA726D00BA4165 /* Resources */,
 				7AA2F58721E6579C0002331B /* Level */,
 				7AA2F54921E422580002331B /* AppDelegate.swift */,
 				7AA2F57521E522F90002331B /* Model */,
@@ -263,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AA2F55521E422580002331B /* Main.storyboard in Resources */,
+				7A32292921EA728A00BA4165 /* ShotFired.sks in Resources */,
 				7AA2F54C21E422580002331B /* GameScene.sks in Resources */,
 				7AA2F55721E422760002331B /* Assets.xcassets in Resources */,
 				7AA2F55A21E422760002331B /* LaunchScreen.storyboard in Resources */,

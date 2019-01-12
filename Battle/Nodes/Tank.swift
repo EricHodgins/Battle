@@ -86,10 +86,11 @@ class Tank: SKSpriteNode {
             yPosition = position.y - (size.height/2) - 8
         }
         
-        projectile.position = CGPoint(x: position.x, y: yPosition)
-        
         let emissionAngle = MathHelper.calculateEmissionAngle(fromOrigin: CGPoint(x: self.position.x, y: yPosition), toPoint: point)
         projectile.zRotation = .pi/2 - emissionAngle
+        projectile.position = CGPoint(x: position.x, y: yPosition)
+        
+        fireExplosion(projectile: projectile)
         
         let pointOffScreen = MathHelper.trajectoryEndPoint(fromOrigin: self.position, toPoint: point, screenSize: screenSize)
         
@@ -102,6 +103,20 @@ class Tank: SKSpriteNode {
         let projectileMoveTo = SKAction.move(to: pointOffScreen, duration: duration)
         gameScene.addChild(projectile)
         projectile.run(projectileMoveTo)
+    }
+    
+    private func fireExplosion(projectile: Projectile) {
+        guard let explosion = SKEmitterNode(fileNamed: "ShotFired") else { return }
+        explosion.emissionAngle *= -1
+        explosion.zPosition = 10
+        explosion.position = CGPoint(x: 0.5, y: -5)
+        explosion.targetNode = projectile
+        projectile.addChild(explosion)
+        
+        let delay = SKAction.wait(forDuration: 3.0)
+        self.run(delay) {
+            explosion.removeFromParent()
+        }
     }
     
     deinit {
