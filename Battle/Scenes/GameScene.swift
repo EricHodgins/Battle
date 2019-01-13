@@ -158,6 +158,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let fireDelay = SKAction.wait(forDuration: turret.firingDelay)
         let fireProjectile = SKAction.run { // self, turret already unowned
             turret.didFire.value = Target(shooter: shooter, wasHit: true)
+            turret.fireExplosion()
             self.addChild(newProjectile)
             newProjectile.position = startPt
             let moveAction = SKAction.move(to: endPt, duration: duration)
