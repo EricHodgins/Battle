@@ -19,6 +19,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var tankAI: TankAI? = nil
     var level: Level!
     
+    var leftControl: Control!
+    var rightControl: Control!
+    
     override func didMove(to view: SKView) {
         build()
         backgroundColor = .black
@@ -45,12 +48,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(tank)
         self.addChild(enemy)
+        
+        leftControl = Control(direction: .left)
+        leftControl.anchorPoint = CGPoint.zero
+        leftControl.position = CGPoint(x: 0, y: 0)
+        rightControl = Control(direction: .right)
+        rightControl.anchorPoint = CGPoint.zero
+        rightControl.position = CGPoint(x: self.size.width - leftControl.size.width, y: 0)
+        self.addChild(leftControl)
+        self.addChild(rightControl)
     }
     
     private func moveTank(touchingPoint: CGPoint) {
         if touchingPoint.x >= self.size.width / 2 {
+            rightControl.isPressed()
+            leftControl.isIdle()
             tank.direction = .right
         } else {
+            leftControl.isPressed()
+            rightControl.isIdle()
             tank.direction = .left
         }
     }
@@ -58,8 +74,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let touchedPt = touch.location(in: self)
+            let node = atPoint(touchedPt)
             if touchedPt.y >= 200 {
                 tank.fireTowards(point: touchedPt, screenSize: self.size)
+            } else if node.name == "player_control" {
+                node.convert(touchedPt, to: self)
+                moveTank(touchingPoint: touchedPt)
             } else {
                 moveTank(touchingPoint: touchedPt)
             }
@@ -77,6 +97,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func touchUp(atPoint pos : CGPoint) {
         tank.direction = .idle
+        leftControl.isIdle()
+        rightControl.isIdle()
         //goToMenuScene()
     }
     
