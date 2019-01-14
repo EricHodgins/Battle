@@ -49,12 +49,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(tank)
         self.addChild(enemy)
         
+        let yPosition: CGFloat = 40
         leftControl = Control(direction: .left)
         leftControl.anchorPoint = CGPoint.zero
-        leftControl.position = CGPoint(x: 0, y: 0)
+        leftControl.position = CGPoint(x: 0, y: yPosition)
         rightControl = Control(direction: .right)
         rightControl.anchorPoint = CGPoint.zero
-        rightControl.position = CGPoint(x: self.size.width - leftControl.size.width, y: 0)
+        rightControl.position = CGPoint(x: self.size.width - leftControl.size.width, y: yPosition)
         self.addChild(leftControl)
         self.addChild(rightControl)
     }
@@ -148,6 +149,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if let turret = otherBody.node as? Turret {
                     turretHitSequence(turret: turret, shooter: shooter)
                 }
+            case PhysicsCategory.powerup.rawValue:
+                projectile.removeFromParent()
             default:
                 print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
             }

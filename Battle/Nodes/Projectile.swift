@@ -20,7 +20,7 @@ class Projectile: SKSpriteNode {
         
         self.physicsBody = SKPhysicsBody(texture: tankTexture, size: self.size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.projectile.rawValue
-        self.physicsBody?.contactTestBitMask = PhysicsCategory.boundary.rawValue | PhysicsCategory.tank.rawValue | PhysicsCategory.turret.rawValue
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.boundary.rawValue | PhysicsCategory.tank.rawValue | PhysicsCategory.turret.rawValue | PhysicsCategory.powerup.rawValue
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.mass = 0
         self.physicsBody?.linearDamping = 1.0

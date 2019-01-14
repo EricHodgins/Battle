@@ -14,6 +14,9 @@ class Level {
     private var turrets: [Turret] = []
     public var numberOfTurrets: Int = 3
     
+    private var powerupTripleBullets: [PowerupTripleBullet] = []
+    public var numberOfPowerupTripleBullets: Int = 2
+    
     init(gameScene: GameScene) {
         self.gameScene = gameScene
         buildLevel()
@@ -30,8 +33,10 @@ class Level {
         let verticalSpacing: CGFloat = heightDiff / CGFloat(numberOfTurrets - 1)
         for i in stride(from: 0, to: numberOfTurrets, by: 1) {
             if i % 2 != 0 {
-//                let randomYpos = gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing)
-//                powerUpYpositions.append(randomYpos)
+                let randomYpos = gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing)
+                let powerupTripleBullet = PowerupTripleBullet()
+                powerupTripleBullet.position = CGPoint(x: randomXposition(), y: randomYpos)
+                gameScene.addChild(powerupTripleBullet)
             } else {
                 let turret = Turret()
                 turret.position.x = randomXposition()

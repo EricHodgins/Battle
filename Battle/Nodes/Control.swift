@@ -10,7 +10,7 @@ import SpriteKit
 
 class Control: SKSpriteNode {
 
-    var initialSize: CGSize = CGSize(width: 100, height: 50)
+    var initialSize: CGSize = CGSize(width: 60, height: 30)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Controls")
     
     private let idleTexture: SKTexture!
