@@ -22,6 +22,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var leftControl: Control!
     var rightControl: Control!
     
+    let hud = HUD()
+    
     override func didMove(to view: SKView) {
         build()
         backgroundColor = .black
@@ -58,6 +60,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightControl.position = CGPoint(x: self.size.width - leftControl.size.width, y: yPosition)
         self.addChild(leftControl)
         self.addChild(rightControl)
+        
+        hud.position = CGPoint(x: 10, y: self.size.height)
+        self.addChild(hud)
     }
     
     private func moveTank(touchingPoint: CGPoint) {

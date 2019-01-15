@@ -30,12 +30,12 @@ class PowerupTripleBullet: SKSpriteNode {
     
     private func pulse() {
         let pulseInGroup = SKAction.group([
-            SKAction.fadeAlpha(by: 0.1, duration: 2.5),
-            SKAction.scale(to: 0.8, duration: 2.5)
+            SKAction.fadeAlpha(to: 0.6, duration: 2.0),
+            SKAction.scale(to: 0.8, duration: 2.0)
         ])
         
         let pulseOutGroup = SKAction.group([
-            SKAction.fadeAlpha(by: 1, duration: 1),
+            SKAction.fadeAlpha(to: 1, duration: 1),
             SKAction.scale(to: 1, duration: 1)
         ])
         
@@ -45,5 +45,9 @@ class PowerupTripleBullet: SKSpriteNode {
         
         let pulseAction = SKAction.repeatForever(pulseSequence)
         self.run(pulseAction)
+    }
+    
+    deinit {
+        print("Powerup Deinit")
     }
 }
