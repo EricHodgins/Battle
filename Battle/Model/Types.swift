@@ -17,6 +17,7 @@ enum PhysicsCategory: UInt32 {
     case projectile = 4
     case turret = 8
     case powerup = 16
+    case tankHit = 32
 }
 
 enum Shooter {
@@ -27,4 +28,8 @@ enum Shooter {
 struct Target {
     var shooter: Shooter
     var wasHit: Bool
+}
+
+struct TankHit {
+    var health: Int
 }

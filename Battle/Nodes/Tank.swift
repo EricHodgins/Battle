@@ -18,6 +18,14 @@ class Tank: SKSpriteNode {
     public let movingSpeed: Double = 60
     
     var didFireAtPoint: Observable<CGPoint> = Observable(CGPoint.zero)
+    private var health: Int = 100 {
+        didSet {
+            self.wasHit.value = TankHit(health: health)
+        }
+    }
+    private var lastProjectile: Projectile!
+    
+    public var wasHit: Observable<TankHit> = Observable(TankHit(health: 100))
     
     init(type: TankType) {
         self.type = type
@@ -116,6 +124,17 @@ class Tank: SKSpriteNode {
         let delay = SKAction.wait(forDuration: 3.0)
         self.run(delay) {
             explosion.removeFromParent()
+        }
+    }
+    
+    public func hasBeenHitBy(projectile: Projectile) {
+        if lastProjectile != projectile {
+            lastProjectile = projectile
+            if health == 100 {
+                health -= 50
+            } else {
+                health -= 25
+            }
         }
     }
     

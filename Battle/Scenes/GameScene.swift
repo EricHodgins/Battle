@@ -22,7 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var leftControl: Control!
     var rightControl: Control!
     
-    let hud = HUD()
+    var hud: HUD!
     
     override func didMove(to view: SKView) {
         build()
@@ -61,6 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(leftControl)
         self.addChild(rightControl)
         
+        hud = HUD(playerTank: tank)
         hud.position = CGPoint(x: 10, y: self.size.height)
         self.addChild(hud)
     }
@@ -129,6 +130,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastUpdateTime = currentTime
     }
     
+    func didEnd(_ contact: SKPhysicsContact) {
+        
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         let otherBody: SKPhysicsBody
         let projectileBody: SKPhysicsBody
@@ -147,7 +152,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             case PhysicsCategory.boundary.rawValue:
                 projectile.removeFromParent()
             case PhysicsCategory.tank.rawValue:
+                let tank = otherBody.node as! Tank
                 projectile.removeFromParent()
+                if tank.type == .friendly {
+                    tank.hasBeenHitBy(projectile: projectile)
+                }
             case PhysicsCategory.turret.rawValue:
                 let shooter = projectile.shooter
                 projectile.removeFromParent()
