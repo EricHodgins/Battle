@@ -135,6 +135,16 @@ class Tank: SKSpriteNode {
             } else {
                 health -= 25
             }
+            
+            let fade = SKAction.fadeAlpha(to: 0.1, duration: 0.5)
+            let normal = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
+            
+            let sequence = SKAction.sequence([
+                fade, normal
+            ])
+            
+            let hitAction = SKAction.repeat(sequence, count: 5)
+            self.run(hitAction)
         }
     }
     

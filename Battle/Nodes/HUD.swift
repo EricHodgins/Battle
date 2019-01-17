@@ -11,14 +11,27 @@ import SpriteKit
 class HUD: SKSpriteNode {
     var textureAtlas = SKTextureAtlas(named: "HUD")
     let initialSize = CGSize(width: 200, height: 60)
-    var backgroundHealthNode: SKShapeNode!
-    var healthNode: SKShapeNode!
+    var backgroundHealthNode: SKSpriteNode!
+    var healthNode: SKSpriteNode!
+    var healthNodeDanger: SKSpriteNode!
     let percentText = SKLabelNode(fontNamed: "Arial Rounded MT Bold")
     
     let player: Tank!
+    let dangerLevel: Int = 25
     
     init(playerTank: Tank) {
+        let healthIndicatorSize = CGSize(width: 183, height: 9)
+        let dangerLevelSize = CGSize(width: healthIndicatorSize.width * (CGFloat(dangerLevel) / 100), height: 9)
+        let backgroundHealthTexture = textureAtlas.textureNamed("background_health_indicator")
+        let healthTexture = textureAtlas.textureNamed("health_level")
+        let dangerTexture = textureAtlas.textureNamed("health_level_danger")
+        
+        backgroundHealthNode = SKSpriteNode(texture: backgroundHealthTexture, color: .clear, size: healthIndicatorSize)
+        healthNode = SKSpriteNode(texture: healthTexture, color: .clear, size: healthIndicatorSize)
+        healthNodeDanger = SKSpriteNode(texture: dangerTexture, color: .clear, size: dangerLevelSize)
+        
         self.player = playerTank
+        
         let backgroundTexture = textureAtlas.textureNamed("background")
         super.init(texture: backgroundTexture, color: .clear, size: initialSize)
         anchorPoint = CGPoint(x: 0, y: 1)
@@ -39,15 +52,18 @@ class HUD: SKSpriteNode {
     }
     
     func setupHudNodes() {
-        let healthRect = CGRect(x: 10, y: -30 - 3, width: 180, height: 6)
-        backgroundHealthNode = SKShapeNode(rect: healthRect, cornerRadius: 4)
-        backgroundHealthNode.fillColor = UIColor(displayP3Red: 151/255.0, green: 198/255.0, blue: 250/255.0, alpha: 0.5)
+        let offsetPt = CGPoint(x: 8, y: -30 - 3)
+        backgroundHealthNode.anchorPoint = CGPoint(x: 0, y: 0.5)
+        backgroundHealthNode.position = offsetPt
         backgroundHealthNode.zPosition = 10
         
-        healthNode = SKShapeNode(rect: healthRect, cornerRadius: 8)
-        healthNode.fillColor = UIColor(displayP3Red: 98/255.0, green: 168/255.0, blue: 246/255.0, alpha: 1.0)
-        
+        healthNode.anchorPoint = CGPoint(x: 0, y: 0.5)
+        healthNode.position = offsetPt
         healthNode.zPosition = 20
+        
+        healthNodeDanger.anchorPoint = CGPoint(x: 0, y: 0.5)
+        healthNodeDanger.position = offsetPt
+        healthNodeDanger.zPosition = 20
         
         percentText.text = "100 %"
         percentText.fontSize = 12
@@ -60,14 +76,26 @@ class HUD: SKSpriteNode {
     }
     
     private func tankHit(health: Int) {
-        if health <= 25 {
-            healthNode.fillColor = UIColor.red
+        guard health > 0 else {
+            print("GAME OVER")
+            let gameScene = self.parent as! GameScene
+            gameScene.goToMenuScene()
+            return
         }
         
+        if health <= dangerLevel {
+            healthNode.removeFromParent()
+            self.addChild(healthNodeDanger)
+        }
+
         let to: CGFloat = CGFloat(health) / 100
         let scaleX = SKAction.scaleX(to: to, duration: 1.5)
         healthNode.run(scaleX)
         percentText.text = "\(health) %"
+    }
+    
+    deinit {
+        print("HUD Deinit")
     }
     
 }

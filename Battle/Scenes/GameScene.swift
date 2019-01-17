@@ -109,7 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //goToMenuScene()
     }
     
-    private func goToMenuScene() {
+    public func goToMenuScene() {
         self.view?.presentScene(MenuScene(size: self.size))
     }
     
