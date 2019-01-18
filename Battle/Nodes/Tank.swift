@@ -13,7 +13,12 @@ class Tank: SKSpriteNode {
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
     let type: TankType!
     
-    var canShoot: Bool = true
+    var canShoot: Bool = true {
+        didSet {
+            let gameScene = self.parent as! GameScene
+            gameScene.hud.updateWhoIsShooterIndicator(tank: self)
+        }
+    }
     var direction: Direction = .idle
     public let movingSpeed: Double = 60
     
