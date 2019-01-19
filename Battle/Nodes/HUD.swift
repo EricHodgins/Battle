@@ -19,10 +19,11 @@ class HUD: SKSpriteNode {
     private var friendlyTurnIndicatorNode: SKSpriteNode!
     private var enemyTurnIndicatorNode: SKSpriteNode!
     
-    let player: Tank!
+    var player: Tank!
+    var enemyTank: Tank!
     let dangerLevel: Int = 25
     
-    init(playerTank: Tank) {
+    init(playerTank: Tank, enemyTank: Tank) {
         let friendlyTurnTexture = textureAtlas.textureNamed("friendlys_turn")
         let enemiesTurnTexture = textureAtlas.textureNamed("enemies_turn")
         
@@ -39,6 +40,7 @@ class HUD: SKSpriteNode {
         healthNodeDanger = SKSpriteNode(texture: dangerTexture, color: .clear, size: healthIndicatorSize)
         
         self.player = playerTank
+        self.enemyTank = enemyTank
         
         let backgroundTexture = textureAtlas.textureNamed("background")
         super.init(texture: backgroundTexture, color: .clear, size: initialSize)
@@ -49,13 +51,18 @@ class HUD: SKSpriteNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        player = nil
         super.init(coder: aDecoder)
     }
     
     private func setupPlayerObserver() {
         player.wasHit.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self] tankHit, _ in
             self.tankHit(health: tankHit.health)
+        }
+    }
+    
+    private func setupEnemyObserver() {
+        enemyTank.wasHit.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self] tankHit, _ in
+            self.enemyHit(health: tankHit.health)
         }
     }
     
@@ -125,6 +132,10 @@ class HUD: SKSpriteNode {
             gameOver()
             return
         }
+    }
+    
+    private func enemyHit(health: Int) {
+        
     }
     
     private func gameOver() {

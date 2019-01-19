@@ -61,7 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(leftControl)
         self.addChild(rightControl)
         
-        hud = HUD(playerTank: tank)
+        hud = HUD(playerTank: tank, enemyTank: enemy)
         hud.position = CGPoint(x: 10, y: self.size.height)
         self.addChild(hud)
     }

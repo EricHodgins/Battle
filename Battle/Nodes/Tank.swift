@@ -150,7 +150,26 @@ class Tank: SKSpriteNode {
             
             let hitAction = SKAction.repeat(sequence, count: 5)
             self.run(hitAction)
+            
+            if health <= 25 {
+                addSmoke()
+            }
         }
+    }
+    
+    private func addSmoke() {
+        guard let smoke = SKEmitterNode(fileNamed: "TankDangerSmoke") else { return }
+        if name == "friendly" {
+            smoke.emissionAngle = -.pi / 2
+        } else {
+            smoke.emissionAngle = .pi / 2
+        }
+        
+        smoke.zPosition = 1
+        smoke.position = CGPoint(x: 0, y: 0)
+        
+        self.addChild(smoke)
+
     }
     
     deinit {
