@@ -71,6 +71,7 @@ class HUD: SKSpriteNode {
         backgroundHealthNode.anchorPoint = CGPoint(x: 0, y: 0.5)
         backgroundHealthNode.position = offsetPt
         backgroundHealthNode.zPosition = 10
+        backgroundHealthNode.alpha = 0.6
         
         healthNode.anchorPoint = CGPoint(x: 0, y: 0.5)
         healthNode.position = offsetPt

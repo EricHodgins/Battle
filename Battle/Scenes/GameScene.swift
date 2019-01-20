@@ -163,6 +163,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if tank.type == .friendly {
                     EffectsHelper.screenShake(node: self.camera!, duration: 3)
                     tank.hasBeenHitBy(projectile: projectile, contact: contact)
+                } else if tank.type == .enemy {
+                    tank.hasBeenHitBy(projectile: projectile, contact: contact)
                 }
             case PhysicsCategory.turret.rawValue:
                 let shooter = projectile.shooter

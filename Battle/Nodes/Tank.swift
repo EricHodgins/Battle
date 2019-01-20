@@ -177,17 +177,11 @@ class Tank: SKSpriteNode {
     
     private func addSmoke() {
         guard let smoke = SKEmitterNode(fileNamed: "TankDangerSmoke") else { return }
-        if name == "friendly" {
-            smoke.emissionAngle = -.pi / 2
-        } else {
-            smoke.emissionAngle = .pi / 2
-        }
-        
-        smoke.zPosition = 1
+        smoke.emissionAngle = .pi / 2
+        smoke.zPosition = 0
         smoke.position = CGPoint(x: 0, y: 0)
         
         self.addChild(smoke)
-
     }
     
     deinit {
