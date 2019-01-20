@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    let cam = SKCameraNode()
+    
     var lastUpdateTime: TimeInterval!
     let gameDirector: GameDirector = GameDirector()
     var tank: Tank!
@@ -36,6 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func build() {
+        self.camera = cam
         level = Level(gameScene: self)
         
         tank = gameDirector.createHumanTank()
@@ -48,6 +51,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tankAI = TankAI(gameScene: self)
         tankAI?.setupTurretsObserver()
         
+        self.addChild(self.camera!)
+        self.camera!.zPosition = 50
+        self.camera?.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         self.addChild(tank)
         self.addChild(enemy)
         
@@ -155,7 +161,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let tank = otherBody.node as! Tank
                 projectile.removeFromParent()
                 if tank.type == .friendly {
-                    tank.hasBeenHitBy(projectile: projectile)
+                    EffectsHelper.screenShake(node: self.camera!, duration: 3)
+                    tank.hasBeenHitBy(projectile: projectile, contact: contact)
                 }
             case PhysicsCategory.turret.rawValue:
                 let shooter = projectile.shooter

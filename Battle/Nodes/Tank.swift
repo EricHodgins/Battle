@@ -132,7 +132,7 @@ class Tank: SKSpriteNode {
         }
     }
     
-    public func hasBeenHitBy(projectile: Projectile) {
+    public func hasBeenHitBy(projectile: Projectile, contact: SKPhysicsContact) {
         if lastProjectile != projectile {
             lastProjectile = projectile
             if health == 100 {
@@ -154,7 +154,25 @@ class Tank: SKSpriteNode {
             if health <= 25 {
                 addSmoke()
             }
+            
+            tankHitExplosion(contact: contact)
         }
+    }
+    
+    private func tankHitExplosion(contact: SKPhysicsContact) {
+        guard let explosion = SKEmitterNode(fileNamed: "TankHit") else { return }
+        explosion.zPosition = 10
+        explosion.position = explosion.convert(contact.contactPoint, to: self)
+        explosion.targetNode = self
+        
+        let delay = SKAction.wait(forDuration: 2)
+        let remove = SKAction.run {
+            explosion.removeFromParent()
+        }
+        self.addChild(explosion)
+        
+        let seq = SKAction.sequence([delay, remove])
+        self.run(seq)
     }
     
     private func addSmoke() {
