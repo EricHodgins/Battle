@@ -141,7 +141,7 @@ class HUD: SKSpriteNode {
     
     private func gameOver() {
         print("GAME OVER")
-        let delay = SKAction.wait(forDuration: 3)
+        let delay = SKAction.wait(forDuration: 10)
         let goToMenu = SKAction.run { [unowned self] in
             let gameScene = self.parent as! GameScene
             gameScene.goToMenuScene()

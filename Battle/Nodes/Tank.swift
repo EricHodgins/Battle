@@ -46,7 +46,7 @@ class Tank: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(texture: tankTexture, size: self.size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.tank.rawValue
         self.physicsBody?.affectedByGravity = false
-        self.physicsBody?.mass = 10000000
+        self.physicsBody?.mass = 100000
         self.physicsBody?.linearDamping = 1.0
         self.physicsBody?.friction = 0
         self.physicsBody?.restitution = 1
@@ -134,6 +134,8 @@ class Tank: SKSpriteNode {
     
     public func hasBeenHitBy(projectile: Projectile, contact: SKPhysicsContact) {
         if lastProjectile != projectile {
+            self.physicsBody?.categoryBitMask = PhysicsCategory.tankRecoverMode.rawValue
+            
             lastProjectile = projectile
             if health == 100 {
                 health -= 50
@@ -141,25 +143,31 @@ class Tank: SKSpriteNode {
                 health -= 25
             }
             
-            let fade = SKAction.fadeAlpha(to: 0.1, duration: 0.5)
-            let normal = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
-            
-            let sequence = SKAction.sequence([
-                fade, normal
-            ])
-            
-            let hitAction = SKAction.repeat(sequence, count: 5)
-            self.run(hitAction)
-            
-            if health <= 25 {
-                addSmoke()
+            if health <= 0 {
+                tankDefeatedExplosion(contact: contact)
+            } else {
+                tankHitExplosion(contact: contact)
             }
-            
-            tankHitExplosion(contact: contact)
         }
     }
     
     private func tankHitExplosion(contact: SKPhysicsContact) {
+        let fade = SKAction.fadeAlpha(to: 0.1, duration: 0.5)
+        let normal = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
+        
+        let sequence = SKAction.sequence([fade, normal])
+        let resetCategory = SKAction.run { [unowned self] in
+            self.physicsBody?.categoryBitMask = PhysicsCategory.tank.rawValue
+        }
+        
+        let fadeInOut = SKAction.repeat(sequence, count: 5)
+        let hitAction = SKAction.sequence([fadeInOut, resetCategory])
+        self.run(hitAction)
+        
+        if health <= 25 {
+            addSmoke()
+        }
+        
         guard let explosion = SKEmitterNode(fileNamed: "TankHit") else { return }
         explosion.zPosition = 10
         explosion.position = explosion.convert(contact.contactPoint, to: self)
@@ -182,6 +190,22 @@ class Tank: SKSpriteNode {
         smoke.position = CGPoint(x: 0, y: 0)
         
         self.addChild(smoke)
+    }
+    
+    private func tankDefeatedExplosion(contact: SKPhysicsContact) {
+        guard let explosion = SKEmitterNode(fileNamed: "TankDefeatedExplosion") else { return }
+        self.alpha = 0.0
+        explosion.zPosition = 10
+        explosion.position = contact.contactPoint
+        
+        let delay = SKAction.wait(forDuration: 2)
+        let remove = SKAction.run {
+            explosion.removeFromParent()
+        }
+        self.parent!.addChild(explosion)
+        
+        let seq = SKAction.sequence([delay, remove])
+        self.parent!.run(seq)
     }
     
     deinit {
