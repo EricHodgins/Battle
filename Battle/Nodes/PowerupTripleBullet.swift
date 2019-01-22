@@ -15,7 +15,7 @@ class PowerupTripleBullet: SKSpriteNode {
     init() {
         let texture = textureAtlas.textureNamed("triple_bullet")
         super.init(texture: texture, color: .clear, size: initialSize)
-        self.name = "powerup_triple_bullet"
+        self.name = PowerupType.tripleBullet.rawValue
         
         self.physicsBody = SKPhysicsBody(texture: texture, size: self.size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.powerup.rawValue

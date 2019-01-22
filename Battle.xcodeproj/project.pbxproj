@@ -17,6 +17,8 @@
 		7A32293921F3DFF200BA4165 /* TankHit.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A32293821F3DFF200BA4165 /* TankHit.sks */; };
 		7A32293B21F3E56D00BA4165 /* EffectsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32293A21F3E56D00BA4165 /* EffectsHelper.swift */; };
 		7A32293D21F5093100BA4165 /* TankDefeatedExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A32293C21F5093100BA4165 /* TankDefeatedExplosion.sks */; };
+		7A32294121F58BF700BA4165 /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32294021F58BF700BA4165 /* Powerup.swift */; };
+		7A32294621F6ABF300BA4165 /* TripleBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32294521F6ABF300BA4165 /* TripleBullet.swift */; };
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
@@ -61,6 +63,8 @@
 		7A32293821F3DFF200BA4165 /* TankHit.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TankHit.sks; sourceTree = "<group>"; };
 		7A32293A21F3E56D00BA4165 /* EffectsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsHelper.swift; sourceTree = "<group>"; };
 		7A32293C21F5093100BA4165 /* TankDefeatedExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TankDefeatedExplosion.sks; sourceTree = "<group>"; };
+		7A32294021F58BF700BA4165 /* Powerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
+		7A32294521F6ABF300BA4165 /* TripleBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripleBullet.swift; sourceTree = "<group>"; };
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -117,6 +121,14 @@
 				7A32293C21F5093100BA4165 /* TankDefeatedExplosion.sks */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		7A32294421F6ABE300BA4165 /* Powerups */ = {
+			isa = PBXGroup;
+			children = (
+				7A32294521F6ABF300BA4165 /* TripleBullet.swift */,
+			);
+			path = Powerups;
 			sourceTree = "<group>";
 		};
 		7AA2F53D21E422580002331B = {
@@ -185,6 +197,7 @@
 		7AA2F57521E522F90002331B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7A32294421F6ABE300BA4165 /* Powerups */,
 				7AA2F57621E5231B0002331B /* Direction.swift */,
 				7AA2F57F21E57F4F0002331B /* Types.swift */,
 				7AA2F57B21E53B330002331B /* MathHelper.swift */,
@@ -193,6 +206,7 @@
 				7AA2F57D21E57F1E0002331B /* TankBuilder.swift */,
 				7AA2F58521E5B01C0002331B /* TankAI.swift */,
 				7AA2F58321E5AFCD0002331B /* Observable.swift */,
+				7A32294021F58BF700BA4165 /* Powerup.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -332,6 +346,7 @@
 				7AA2F57221E44C170002331B /* MenuScene.swift in Sources */,
 				7A32293521ED981300BA4165 /* HUD.swift in Sources */,
 				7AA2F58B21E657D90002331B /* Level.swift in Sources */,
+				7A32294121F58BF700BA4165 /* Powerup.swift in Sources */,
 				7AA2F58921E657BB0002331B /* LevelOne.swift in Sources */,
 				7AA2F57421E466D00002331B /* Tank.swift in Sources */,
 				7AA2F58421E5AFCD0002331B /* Observable.swift in Sources */,
@@ -345,6 +360,7 @@
 				7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */,
 				7AA2F58D21E676770002331B /* Turret.swift in Sources */,
 				7AA2F57721E5231B0002331B /* Direction.swift in Sources */,
+				7A32294621F6ABF300BA4165 /* TripleBullet.swift in Sources */,
 				7A32293B21F3E56D00BA4165 /* EffectsHelper.swift in Sources */,
 				7AA2F57E21E57F1E0002331B /* TankBuilder.swift in Sources */,
 			);

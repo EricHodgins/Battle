@@ -25,6 +25,10 @@ enum Shooter {
     case enemy
 }
 
+enum PowerupType: String {
+    case tripleBullet = "triple_bullet"
+}
+
 struct Target {
     var shooter: Shooter
     var wasHit: Bool

@@ -28,9 +28,11 @@ class Tank: SKSpriteNode {
             self.wasHit.value = TankHit(health: health)
         }
     }
-    private var lastProjectile: Projectile!
     
+    private var lastProjectile: Projectile!
     public var wasHit: Observable<TankHit> = Observable(TankHit(health: 100))
+    
+    private var powerups: [Powerup] = []
     
     init(type: TankType) {
         self.type = type
@@ -77,7 +79,12 @@ class Tank: SKSpriteNode {
     public func fireTowards(point: CGPoint, screenSize: CGSize) {
         if canShoot {
             udpateStateForJustFired()
-            fireStandardProjectile(point: point, screenSize: screenSize)
+            if powerups.count > 0 {
+                let powerup = powerups.removeFirst()
+                powerup.activate()
+            } else {
+                fireStandardProjectile(point: point, screenSize: screenSize)
+            }
         }
     }
     
