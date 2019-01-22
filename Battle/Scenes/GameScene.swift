@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var rightControl: Control!
     
     var hud: HUD!
+    let background = Background()
     
     override func didMove(to view: SKView) {
         build()
@@ -70,6 +71,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hud = HUD(playerTank: tank, enemyTank: enemy)
         hud.position = CGPoint(x: 10, y: self.size.height)
         self.addChild(hud)
+        
+        background.spawn(parentNode: self, imageName: "background_main")
     }
     
     private func moveTank(touchingPoint: CGPoint) {
@@ -173,7 +176,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     turretHitSequence(turret: turret, shooter: shooter)
                 }
             case PhysicsCategory.powerup.rawValue:
+                let powerupNode = otherBody.node as! SKSpriteNode
+                if projectile.shooter == .friendly {
+                    tank.addPowerup(powerup: powerupNode)
+                } else {
+                    enemy.addPowerup(powerup: powerupNode)
+                }
                 projectile.removeFromParent()
+                otherBody.node?.removeFromParent()
             default:
                 print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
             }

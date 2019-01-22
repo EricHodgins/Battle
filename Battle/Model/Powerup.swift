@@ -6,6 +6,8 @@
 //  Copyright © 2019 Eric Hodgins. All rights reserved.
 //
 
+import SpriteKit
+
 protocol Powerup: class {
-    func activate()
+    func activate(tank: Tank, pointFiredAt point: CGPoint, screenSize: CGSize)
 }

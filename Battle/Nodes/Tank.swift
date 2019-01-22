@@ -30,9 +30,10 @@ class Tank: SKSpriteNode {
     }
     
     private var lastProjectile: Projectile!
+    private var lastPowerupNode: SKSpriteNode!
     public var wasHit: Observable<TankHit> = Observable(TankHit(health: 100))
     
-    private var powerups: [Powerup] = []
+    public var powerups: [Powerup] = []
     
     init(type: TankType) {
         self.type = type
@@ -81,7 +82,7 @@ class Tank: SKSpriteNode {
             udpateStateForJustFired()
             if powerups.count > 0 {
                 let powerup = powerups.removeFirst()
-                powerup.activate()
+                powerup.activate(tank: self, pointFiredAt: point, screenSize: screenSize)
             } else {
                 fireStandardProjectile(point: point, screenSize: screenSize)
             }
@@ -92,7 +93,7 @@ class Tank: SKSpriteNode {
         canShoot = false
     }
     
-    private func fireStandardProjectile(point: CGPoint, screenSize: CGSize) {
+    public func fireStandardProjectile(point: CGPoint, screenSize: CGSize) {
         guard let gameScene = self.parent as? GameScene else { fatalError() }
         
         let projectile = Projectile()
@@ -154,6 +155,18 @@ class Tank: SKSpriteNode {
                 tankDefeatedExplosion(contact: contact)
             } else {
                 tankHitExplosion(contact: contact)
+            }
+        }
+    }
+    
+    public func addPowerup(powerup: SKSpriteNode) {
+        if lastPowerupNode != powerup {
+            lastPowerupNode = powerup
+            switch powerup.name {
+            case PowerupType.tripleBullet.rawValue:
+                powerups.append(TripleBullet())
+            default:
+                return
             }
         }
     }
