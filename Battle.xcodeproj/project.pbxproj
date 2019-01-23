@@ -20,6 +20,11 @@
 		7A32294121F58BF700BA4165 /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32294021F58BF700BA4165 /* Powerup.swift */; };
 		7A32294621F6ABF300BA4165 /* TripleBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32294521F6ABF300BA4165 /* TripleBullet.swift */; };
 		7A32294821F6D06700BA4165 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32294721F6D06700BA4165 /* Background.swift */; };
+		7A32294B21F8248400BA4165 /* PowerupSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32294A21F8248400BA4165 /* PowerupSprite.swift */; };
+		7A32294D21F8295800BA4165 /* PowerupHealthBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32294C21F8295800BA4165 /* PowerupHealthBoost.swift */; };
+		7A32294F21F8296600BA4165 /* PowerupMoveTurrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32294E21F8296600BA4165 /* PowerupMoveTurrets.swift */; };
+		7A32295121F82BD400BA4165 /* HealthBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295021F82BD400BA4165 /* HealthBoost.swift */; };
+		7A32295321F82BE100BA4165 /* MoveTurrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295221F82BE100BA4165 /* MoveTurrets.swift */; };
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
@@ -67,6 +72,11 @@
 		7A32294021F58BF700BA4165 /* Powerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
 		7A32294521F6ABF300BA4165 /* TripleBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripleBullet.swift; sourceTree = "<group>"; };
 		7A32294721F6D06700BA4165 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		7A32294A21F8248400BA4165 /* PowerupSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupSprite.swift; sourceTree = "<group>"; };
+		7A32294C21F8295800BA4165 /* PowerupHealthBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupHealthBoost.swift; sourceTree = "<group>"; };
+		7A32294E21F8296600BA4165 /* PowerupMoveTurrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupMoveTurrets.swift; sourceTree = "<group>"; };
+		7A32295021F82BD400BA4165 /* HealthBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthBoost.swift; sourceTree = "<group>"; };
+		7A32295221F82BE100BA4165 /* MoveTurrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveTurrets.swift; sourceTree = "<group>"; };
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -129,6 +139,19 @@
 			isa = PBXGroup;
 			children = (
 				7A32294521F6ABF300BA4165 /* TripleBullet.swift */,
+				7A32295021F82BD400BA4165 /* HealthBoost.swift */,
+				7A32295221F82BE100BA4165 /* MoveTurrets.swift */,
+			);
+			path = Powerups;
+			sourceTree = "<group>";
+		};
+		7A32294921F8246200BA4165 /* Powerups */ = {
+			isa = PBXGroup;
+			children = (
+				7A32294A21F8248400BA4165 /* PowerupSprite.swift */,
+				7A32293221EC4FE100BA4165 /* PowerupTripleBullet.swift */,
+				7A32294C21F8295800BA4165 /* PowerupHealthBoost.swift */,
+				7A32294E21F8296600BA4165 /* PowerupMoveTurrets.swift */,
 			);
 			path = Powerups;
 			sourceTree = "<group>";
@@ -216,11 +239,11 @@
 		7AA2F57821E52CD50002331B /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				7A32294921F8246200BA4165 /* Powerups */,
 				7AA2F57321E466D00002331B /* Tank.swift */,
 				7AA2F57921E52D160002331B /* Projectile.swift */,
 				7AA2F58C21E676770002331B /* Turret.swift */,
 				7A32292E21EBD67000BA4165 /* Control.swift */,
-				7A32293221EC4FE100BA4165 /* PowerupTripleBullet.swift */,
 				7A32293421ED981300BA4165 /* HUD.swift */,
 				7A32294721F6D06700BA4165 /* Background.swift */,
 			);
@@ -348,13 +371,18 @@
 				7AA2F55021E422580002331B /* GameScene.swift in Sources */,
 				7AA2F57221E44C170002331B /* MenuScene.swift in Sources */,
 				7A32293521ED981300BA4165 /* HUD.swift in Sources */,
+				7A32295321F82BE100BA4165 /* MoveTurrets.swift in Sources */,
 				7AA2F58B21E657D90002331B /* Level.swift in Sources */,
+				7A32295121F82BD400BA4165 /* HealthBoost.swift in Sources */,
 				7A32294121F58BF700BA4165 /* Powerup.swift in Sources */,
 				7AA2F58921E657BB0002331B /* LevelOne.swift in Sources */,
+				7A32294B21F8248400BA4165 /* PowerupSprite.swift in Sources */,
 				7AA2F57421E466D00002331B /* Tank.swift in Sources */,
 				7AA2F58421E5AFCD0002331B /* Observable.swift in Sources */,
 				7AA2F58621E5B01C0002331B /* TankAI.swift in Sources */,
 				7A32292F21EBD67000BA4165 /* Control.swift in Sources */,
+				7A32294D21F8295800BA4165 /* PowerupHealthBoost.swift in Sources */,
+				7A32294F21F8296600BA4165 /* PowerupMoveTurrets.swift in Sources */,
 				7AA2F58021E57F4F0002331B /* Types.swift in Sources */,
 				7AA2F55221E422580002331B /* GameViewController.swift in Sources */,
 				7AA2F57A21E52D160002331B /* Projectile.swift in Sources */,

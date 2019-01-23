@@ -27,6 +27,8 @@ enum Shooter {
 
 enum PowerupType: String {
     case tripleBullet = "triple_bullet"
+    case healthBoost = "health_boost"
+    case moveTurrets = "move_turrets"
 }
 
 struct Target {
