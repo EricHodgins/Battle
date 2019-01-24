@@ -18,6 +18,7 @@ class HUD: SKSpriteNode {
     
     private var friendlyTurnIndicatorNode: SKSpriteNode!
     private var enemyTurnIndicatorNode: SKSpriteNode!
+    private var powerupNode: SKSpriteNode!
     
     var player: Tank!
     var enemyTank: Tank!
@@ -38,6 +39,9 @@ class HUD: SKSpriteNode {
         backgroundHealthNode = SKSpriteNode(texture: backgroundHealthTexture, color: .clear, size: healthIndicatorSize)
         healthNode = SKSpriteNode(texture: healthTexture, color: .clear, size: healthIndicatorSize)
         healthNodeDanger = SKSpriteNode(texture: dangerTexture, color: .clear, size: healthIndicatorSize)
+        
+        powerupNode = SKSpriteNode()
+        powerupNode.size = CGSize(width: 28, height: 24)
         
         self.player = playerTank
         self.enemyTank = enemyTank
@@ -86,11 +90,15 @@ class HUD: SKSpriteNode {
         percentText.fontSize = 12
         percentText.position = CGPoint(x: 30, y: -20)
         
-        let turnIndicatorPosition = CGPoint(x: 150, y: -15)
+        let turnIndicatorPosition = CGPoint(x: 190, y: -15)
         friendlyTurnIndicatorNode.position = turnIndicatorPosition
         friendlyTurnIndicatorNode.alpha = 1.0
         enemyTurnIndicatorNode.position = turnIndicatorPosition
         enemyTurnIndicatorNode.alpha = 0.0
+        
+        powerupNode.position = CGPoint(x: 120, y: -15)
+        powerupNode.setScale(0.8)
+        powerupNode.alpha = 0.0
         
         self.addChild(backgroundHealthNode)
         self.addChild(healthNode)
@@ -98,7 +106,7 @@ class HUD: SKSpriteNode {
         self.addChild(percentText)
         self.addChild(friendlyTurnIndicatorNode)
         self.addChild(enemyTurnIndicatorNode)
-        
+        self.addChild(powerupNode)
     }
     
     public func updateWhoIsShooterIndicator(tank: Tank) {
@@ -137,6 +145,18 @@ class HUD: SKSpriteNode {
     
     private func enemyHit(health: Int) {
         
+    }
+    
+    public func updatePowersIndicator( _ powerups: [Powerup]) {
+        guard powerups.isEmpty == false, let powerup = powerups.first else {
+            powerupNode.texture = nil
+            powerupNode.alpha = 0.0
+            return
+        }
+        
+        let textureName = powerup.type.rawValue + "_hud"
+        powerupNode.texture = textureAtlas.textureNamed(textureName)
+        powerupNode.alpha = 1.0
     }
     
     private func gameOver() {

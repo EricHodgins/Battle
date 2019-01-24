@@ -23,7 +23,7 @@ class Tank: SKSpriteNode {
     public let movingSpeed: Double = 60
     
     var didFireAtPoint: Observable<CGPoint> = Observable(CGPoint.zero)
-    private var health: Int = 100 {
+    public var health: Int = 100 {
         didSet {
             self.wasHit.value = TankHit(health: health)
         }
@@ -33,7 +33,12 @@ class Tank: SKSpriteNode {
     private var lastPowerupNode: SKSpriteNode!
     public var wasHit: Observable<TankHit> = Observable(TankHit(health: 100))
     
-    public var powerups: [Powerup] = []
+    public var powerups: [Powerup] = [] {
+        didSet {
+            let gameScene = self.parent as! GameScene
+            gameScene.hud.updatePowersIndicator(powerups)
+        }
+    }
     
     init(type: TankType) {
         self.type = type

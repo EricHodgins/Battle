@@ -9,5 +9,6 @@
 import SpriteKit
 
 protocol Powerup: class {
+    var type: PowerupType {get set}
     func activate(tank: Tank, pointFiredAt point: CGPoint, screenSize: CGSize)
 }

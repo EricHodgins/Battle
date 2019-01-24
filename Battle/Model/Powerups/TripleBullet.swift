@@ -9,7 +9,7 @@
 import SpriteKit
 
 class TripleBullet {
-    
+    var type: PowerupType = PowerupType.tripleBullet
 }
 
 extension TripleBullet: Powerup {

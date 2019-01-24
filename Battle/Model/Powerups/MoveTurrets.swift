@@ -8,7 +8,9 @@
 
 import SpriteKit
 
-class MoveTurrets {}
+class MoveTurrets {
+    var type: PowerupType = PowerupType.moveTurrets
+}
 
 extension MoveTurrets: Powerup {
     func activate(tank: Tank, pointFiredAt point: CGPoint, screenSize: CGSize) {

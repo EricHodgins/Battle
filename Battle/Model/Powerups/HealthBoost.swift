@@ -9,11 +9,11 @@
 import SpriteKit
 
 class HealthBoost {
-    
+    var type: PowerupType = PowerupType.healthBoost
 }
 
 extension HealthBoost: Powerup {
     func activate(tank: Tank, pointFiredAt point: CGPoint, screenSize: CGSize) {
-        
+        tank.health = 100
     }
 }
