@@ -170,6 +170,10 @@ class Tank: SKSpriteNode {
             switch powerup.name {
             case PowerupType.tripleBullet.rawValue:
                 powerups.append(TripleBullet())
+            case PowerupType.healthBoost.rawValue:
+                powerups.append(HealthBoost())
+            case PowerupType.moveTurrets.rawValue:
+                powerups.append(MoveTurrets())
             default:
                 return
             }

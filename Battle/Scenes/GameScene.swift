@@ -176,14 +176,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     turretHitSequence(turret: turret, shooter: shooter)
                 }
             case PhysicsCategory.powerup.rawValue:
-                let powerupNode = otherBody.node as! SKSpriteNode
+                let powerupNode = otherBody.node as! PowerupSprite
                 if projectile.shooter == .friendly {
                     tank.addPowerup(powerup: powerupNode)
                 } else {
                     enemy.addPowerup(powerup: powerupNode)
                 }
+                
+                level.reSpawnPowerup(previousPowerup: powerupNode)
                 projectile.removeFromParent()
-                otherBody.node?.removeFromParent()
+                powerupNode.removeFromParent()
             default:
                 print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
             }
