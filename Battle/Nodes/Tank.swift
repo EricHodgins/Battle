@@ -35,8 +35,10 @@ class Tank: SKSpriteNode {
     
     public var powerups: [Powerup] = [] {
         didSet {
-            let gameScene = self.parent as! GameScene
-            gameScene.hud.updatePowersIndicator(powerups)
+            if self.type == .friendly {
+                let gameScene = self.parent as! GameScene
+                gameScene.hud.updatePowersIndicator(powerups)
+            }
         }
     }
     
@@ -216,7 +218,7 @@ class Tank: SKSpriteNode {
     private func addSmoke() {
         guard let smoke = SKEmitterNode(fileNamed: "TankDangerSmoke") else { return }
         smoke.emissionAngle = .pi / 2
-        smoke.zPosition = 0
+        smoke.zPosition = -1
         smoke.position = CGPoint(x: 0, y: 0)
         smoke.name = self.type.rawValue + "_danger_smoke"
         
