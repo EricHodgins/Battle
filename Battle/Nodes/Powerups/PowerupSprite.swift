@@ -45,4 +45,16 @@ class PowerupSprite: SKSpriteNode {
         let pulseAction = SKAction.repeatForever(pulseSequence)
         self.run(pulseAction)
     }
+    
+    public func addFlashTo(gameScene: GameScene, atPoint point: CGPoint) {
+        guard let flash = SKEmitterNode(fileNamed: "PowerupHit") else { return }
+        flash.position = point
+        
+        let delay = SKAction.wait(forDuration: 2)
+        gameScene.run(delay) {
+            flash.removeFromParent()
+        }
+
+        gameScene.addChild(flash)
+    }
 }

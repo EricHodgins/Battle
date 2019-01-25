@@ -177,6 +177,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             case PhysicsCategory.powerup.rawValue:
                 let powerupNode = otherBody.node as! PowerupSprite
+                powerupNode.addFlashTo(gameScene: self, atPoint: contact.contactPoint)
+                
                 if projectile.shooter == .friendly {
                     tank.addPowerup(powerup: powerupNode)
                 } else {
