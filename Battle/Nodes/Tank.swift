@@ -88,6 +88,7 @@ class Tank: SKSpriteNode {
             if powerups.count > 0 {
                 let powerup = powerups.removeFirst()
                 powerup.activate(tank: self, pointFiredAt: point, screenSize: screenSize)
+                didFireAtPoint.value = CGPoint.zero // Trigger TankAI to react
             } else {
                 fireStandardProjectile(point: point, screenSize: screenSize)
             }
@@ -217,8 +218,14 @@ class Tank: SKSpriteNode {
         smoke.emissionAngle = .pi / 2
         smoke.zPosition = 0
         smoke.position = CGPoint(x: 0, y: 0)
+        smoke.name = self.type.rawValue + "_danger_smoke"
         
         self.addChild(smoke)
+    }
+    
+    public func removeDangerSmoke() {
+        guard let smoke = self.childNode(withName: self.type.rawValue + "_danger_smoke") else { return }
+        smoke.removeFromParent()
     }
     
     private func tankDefeatedExplosion(contact: SKPhysicsContact) {

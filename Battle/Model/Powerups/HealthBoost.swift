@@ -15,5 +15,6 @@ class HealthBoost {
 extension HealthBoost: Powerup {
     func activate(tank: Tank, pointFiredAt point: CGPoint, screenSize: CGSize) {
         tank.health = 100
+        tank.removeDangerSmoke()
     }
 }

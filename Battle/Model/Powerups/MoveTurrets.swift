@@ -14,6 +14,7 @@ class MoveTurrets {
 
 extension MoveTurrets: Powerup {
     func activate(tank: Tank, pointFiredAt point: CGPoint, screenSize: CGSize) {
-        
+        guard let level = (tank.parent as? GameScene)?.level else { fatalError() }
+        level.moveTurrets()
     }
 }
