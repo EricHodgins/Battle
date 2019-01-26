@@ -75,6 +75,10 @@ class Tank: SKSpriteNode {
         if direction != .idle {
             moveTank(timeDelta: timeDelta)
         }
+        
+        if self.hasDefeatedEnemy {
+            self.physicsBody?.velocity.dy = CGFloat(movingSpeed) / 4
+        }
     }
     
     private func moveTank(timeDelta: TimeInterval) {

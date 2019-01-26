@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTime: TimeInterval!
     let gameDirector: GameDirector = GameDirector()
     var tank: Tank!
+    let tankInitialYpos: CGFloat = 100
     var enemy: Tank!
     
     var tankAI: TankAI? = nil
@@ -45,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tank = gameDirector.createHumanTank()
         enemy = gameDirector.createComputerTank()
         
-        tank.position = CGPoint(x: self.size.width/2, y: 100)
+        tank.position = CGPoint(x: self.size.width/2, y: tankInitialYpos)
         enemy.position = CGPoint(x: self.size.width/2, y: self.size.height - 100)
         enemy.zRotation += .pi
         
@@ -58,19 +59,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(tank)
         self.addChild(enemy)
         
-        let yPosition: CGFloat = 40
+        let yPosition: CGFloat = -self.size.height/2 + 40
         leftControl = Control(direction: .left)
         leftControl.anchorPoint = CGPoint.zero
-        leftControl.position = CGPoint(x: 0, y: yPosition)
+        leftControl.position = CGPoint(x: -self.size.width/2, y: yPosition)
         rightControl = Control(direction: .right)
         rightControl.anchorPoint = CGPoint.zero
-        rightControl.position = CGPoint(x: self.size.width - leftControl.size.width, y: yPosition)
-        self.addChild(leftControl)
-        self.addChild(rightControl)
+        rightControl.position = CGPoint(x: self.size.width/2 - leftControl.size.width, y: yPosition)
         
         hud = HUD(playerTank: tank, enemyTank: enemy)
-        hud.position = CGPoint(x: 10, y: self.size.height)
-        self.addChild(hud)
+        hud.position = CGPoint(x: -self.size.width/2, y: self.size.height/2)
+        
+        cam.addChild(hud)
+        cam.addChild(leftControl)
+        cam.addChild(rightControl)
         
         background.spawn(parentNode: self, imageName: "background_main")
     }
@@ -91,7 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let touch = touches.first {
             let touchedPt = touch.location(in: self)
             let node = atPoint(touchedPt)
-            if touchedPt.y >= 200 {
+            if touchedPt.y >= tank.position.y {
                 tank.fireTowards(point: touchedPt, screenSize: self.size)
             } else if node.name == "player_control" {
                 node.convert(touchedPt, to: self)
@@ -126,6 +128,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
+    override func didSimulatePhysics() {
+        if tank.hasDefeatedEnemy {
+            cam.position.y = (self.frame.height / 2) + tank.position.y - tankInitialYpos
+        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         if lastUpdateTime == 0.0 {
             lastUpdateTime = currentTime
@@ -137,10 +145,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         level.update(currentTime, timeDelta: timeDelta)
         
         lastUpdateTime = currentTime
-    }
-    
-    func didEnd(_ contact: SKPhysicsContact) {
-        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
