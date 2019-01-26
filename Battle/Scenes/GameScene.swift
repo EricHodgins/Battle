@@ -28,15 +28,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var hud: HUD!
     let background = Background()
     
+    let boundary = SKSpriteNode()
+    
     override func didMove(to view: SKView) {
         build()
         backgroundColor = .black
         self.physicsWorld.contactDelegate = self
         
         lastUpdateTime = 0.0
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        self.physicsBody?.categoryBitMask = PhysicsCategory.boundary.rawValue
-        
+        //self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        //self.physicsBody?.categoryBitMask = PhysicsCategory.boundary.rawValue
+
     }
     
     private func build() {
@@ -75,6 +77,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cam.addChild(rightControl)
         
         background.spawn(parentNode: self, imageName: "background_main")
+        
+        boundary.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(origin: CGPoint(x: 0, y: (cam.position.y) - self.size.height/2), size: self.size))
+        boundary.physicsBody?.categoryBitMask = PhysicsCategory.boundary.rawValue
+        
+        self.addChild(boundary)
     }
     
     private func moveTank(touchingPoint: CGPoint) {
@@ -107,7 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let touchedPt = touch.location(in: self)
-            if touchedPt.y <= 200 {
+            if touchedPt.y <= tank.position.y {
                 moveTank(touchingPoint: touchedPt)
             }
         }
@@ -131,6 +138,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didSimulatePhysics() {
         if tank.hasDefeatedEnemy {
             cam.position.y = (self.frame.height / 2) + tank.position.y - tankInitialYpos
+            boundary.position = CGPoint(x: 0, y: (cam.position.y) - self.size.height/2)
         }
     }
     
