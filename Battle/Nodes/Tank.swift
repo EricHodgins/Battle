@@ -13,10 +13,13 @@ class Tank: SKSpriteNode {
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
     let type: TankType!
     
+    var hasDefeatedEnemy: Bool = false
     var canShoot: Bool = true {
         didSet {
-            let gameScene = self.parent as! GameScene
-            gameScene.hud.updateWhoIsShooterIndicator(tank: self)
+            if self.health <= 0 { self.canShoot = false }
+            if let gameScene = self.parent as? GameScene {
+                gameScene.hud.updateWhoIsShooterIndicator(tank: self)
+            }
         }
     }
     var direction: Direction = .idle
@@ -98,7 +101,11 @@ class Tank: SKSpriteNode {
     }
     
     private func udpateStateForJustFired() {
-        canShoot = false
+        if hasDefeatedEnemy {
+            canShoot = true
+        } else {
+            canShoot = false
+        }
     }
     
     public func fireStandardProjectile(point: CGPoint, screenSize: CGSize) {
@@ -148,7 +155,7 @@ class Tank: SKSpriteNode {
         }
     }
     
-    public func hasBeenHitBy(projectile: Projectile, contact: SKPhysicsContact) {
+    public func hasBeenHitBy(projectile: Projectile, contact: SKPhysicsContact, completion: ((_ health: Int) -> Void)) {
         if lastProjectile != projectile {
             self.physicsBody?.categoryBitMask = PhysicsCategory.tankRecoverMode.rawValue
             
@@ -164,6 +171,8 @@ class Tank: SKSpriteNode {
             } else {
                 tankHitExplosion(contact: contact)
             }
+            
+            completion(self.health)
         }
     }
     

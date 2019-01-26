@@ -26,6 +26,7 @@
 		7A32295121F82BD400BA4165 /* HealthBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295021F82BD400BA4165 /* HealthBoost.swift */; };
 		7A32295321F82BE100BA4165 /* MoveTurrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295221F82BE100BA4165 /* MoveTurrets.swift */; };
 		7A32295521FAC47700BA4165 /* PowerupHit.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A32295421FAC47600BA4165 /* PowerupHit.sks */; };
+		7A32295921FC04CB00BA4165 /* TurretHit.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A32295821FC04CB00BA4165 /* TurretHit.sks */; };
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
@@ -79,6 +80,7 @@
 		7A32295021F82BD400BA4165 /* HealthBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthBoost.swift; sourceTree = "<group>"; };
 		7A32295221F82BE100BA4165 /* MoveTurrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveTurrets.swift; sourceTree = "<group>"; };
 		7A32295421FAC47600BA4165 /* PowerupHit.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PowerupHit.sks; sourceTree = "<group>"; };
+		7A32295821FC04CB00BA4165 /* TurretHit.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TurretHit.sks; sourceTree = "<group>"; };
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				7A32293821F3DFF200BA4165 /* TankHit.sks */,
 				7A32293C21F5093100BA4165 /* TankDefeatedExplosion.sks */,
 				7A32295421FAC47600BA4165 /* PowerupHit.sks */,
+				7A32295821FC04CB00BA4165 /* TurretHit.sks */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				7A32292921EA728A00BA4165 /* ShotFired.sks in Resources */,
 				7AA2F54C21E422580002331B /* GameScene.sks in Resources */,
 				7A32292D21EAD46D00BA4165 /* Assets.xcassets in Resources */,
+				7A32295921FC04CB00BA4165 /* TurretHit.sks in Resources */,
 				7AA2F55721E422760002331B /* Assets.xcassets in Resources */,
 				7A32293921F3DFF200BA4165 /* TankHit.sks in Resources */,
 				7A32295521FAC47700BA4165 /* PowerupHit.sks in Resources */,

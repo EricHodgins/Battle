@@ -165,9 +165,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 projectile.removeFromParent()
                 if tank.type == .friendly {
                     EffectsHelper.screenShake(node: self.camera!, duration: 3)
-                    tank.hasBeenHitBy(projectile: projectile, contact: contact)
+                    tank.hasBeenHitBy(projectile: projectile, contact: contact) { [unowned self] health in
+                        if health <= 0 {
+                            self.enemy.hasDefeatedEnemy = true
+                        }
+                    }
                 } else if tank.type == .enemy {
-                    tank.hasBeenHitBy(projectile: projectile, contact: contact)
+                    tank.hasBeenHitBy(projectile: projectile, contact: contact) { [unowned self] health in
+                        if health <= 0 {
+                            self.enemy = nil
+                            self.tank.hasDefeatedEnemy = true
+                        }
+                    }
                 }
             case PhysicsCategory.turret.rawValue:
                 let shooter = projectile.shooter
@@ -196,10 +205,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func turretHitSequence(turret: Turret, shooter: Shooter) {
         if shooter == .friendly {
+            guard enemy != nil else { return }
             turret.aimAt(self.enemy) { [unowned self, unowned turret] in
                 self.turretFire(turret: turret, target: self.enemy, shooter: shooter)
             }
         } else {
+            guard tank != nil else { return }
             turret.aimAt(self.tank) { [unowned self, unowned turret] in
                 self.turretFire(turret: turret, target: self.tank, shooter: shooter)
             }
