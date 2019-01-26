@@ -107,6 +107,46 @@ class Level {
         }
     }
     
+    public func removeTurrets() {
+        for turret in turrets {
+            addDisappearSmoke(atPosition: turret.position)
+            turret.removeFromParent()
+        }
+    }
+    
+    public func removePowerups() {
+        guard let gamescene = gameScene else { return }
+        
+        gamescene.enumerateChildNodes(withName: PowerupType.tripleBullet.rawValue) { [unowned self] (node, _) in
+            self.addDisappearSmoke(atPosition: node.position)
+            node.removeFromParent()
+        }
+        
+        gamescene.enumerateChildNodes(withName: PowerupType.healthBoost.rawValue) { [unowned self] (node, _) in
+            self.addDisappearSmoke(atPosition: node.position)
+            node.removeFromParent()
+        }
+        
+        gamescene.enumerateChildNodes(withName: PowerupType.moveTurrets.rawValue) { [unowned self] (node, _) in
+            self.addDisappearSmoke(atPosition: node.position)
+            node.removeFromParent()
+        }
+    }
+    
+    private func addDisappearSmoke(atPosition position: CGPoint) {
+        if let smoke = SKEmitterNode(fileNamed: "DisappearSmoke"),
+           let gamescene = gameScene {
+            smoke.position = position
+            smoke.zPosition = 10
+            let delay = SKAction.wait(forDuration: 10.0)
+            gamescene.run(delay) {
+                smoke.removeFromParent()
+            }
+            
+            gamescene.addChild(smoke)
+        }
+    }
+    
     deinit {
         print("Level Deinit")
     }

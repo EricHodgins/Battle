@@ -36,9 +36,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         lastUpdateTime = 0.0
-        //self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        //self.physicsBody?.categoryBitMask = PhysicsCategory.boundary.rawValue
-
     }
     
     private func build() {
@@ -187,6 +184,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         if health <= 0 {
                             self.enemy = nil
                             self.tank.hasDefeatedEnemy = true
+                            self.level.removeTurrets()
+                            self.level.removePowerups()
                         }
                     }
                 }
@@ -207,7 +206,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     enemy.addPowerup(powerup: powerupNode)
                 }
                 
-                level.reSpawnPowerup(previousPowerup: powerupNode)
+                if tank.hasDefeatedEnemy == false {
+                    level.reSpawnPowerup(previousPowerup: powerupNode)
+                }
                 projectile.removeFromParent()
                 powerupNode.removeFromParent()
             default:
