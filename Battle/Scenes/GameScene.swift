@@ -182,6 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let shooter = projectile.shooter
                 projectile.removeFromParent()
                 if let turret = otherBody.node as? Turret {
+                    turret.hasBeenHit(contactPoint: contact.contactPoint)
                     turretHitSequence(turret: turret, shooter: shooter)
                 }
             case PhysicsCategory.powerup.rawValue:

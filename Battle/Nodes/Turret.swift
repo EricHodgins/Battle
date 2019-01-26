@@ -133,6 +133,19 @@ class Turret: SKSpriteNode {
         }
     }
     
+    public func hasBeenHit(contactPoint: CGPoint) {
+        guard let explosion = SKEmitterNode(fileNamed: "TurretHit") else { return }
+        explosion.position = contactPoint
+        explosion.zPosition = 10
+        explosion.targetNode = self
+        self.parent!.addChild(explosion)
+        
+        let delay = SKAction.wait(forDuration: 3.0)
+        self.run(delay) {
+            explosion.removeFromParent()
+        }
+    }
+    
     deinit {
         print("Turret Deinit")
     }
