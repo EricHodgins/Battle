@@ -136,6 +136,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if tank.hasDefeatedEnemy {
             cam.position.y = (self.frame.height / 2) + tank.position.y - tankInitialYpos
             boundary.position = CGPoint(x: 0, y: (cam.position.y) - self.size.height/2)
+            background.updateBackground(playerPositionY: tank.position.y)
         }
     }
     

@@ -138,12 +138,13 @@ class Level {
            let gamescene = gameScene {
             smoke.position = position
             smoke.zPosition = 10
+            
+            gamescene.addChild(smoke)
+            
             let delay = SKAction.wait(forDuration: 10.0)
             gamescene.run(delay) {
                 smoke.removeFromParent()
             }
-            
-            gamescene.addChild(smoke)
         }
     }
     

@@ -11,6 +11,7 @@ import SpriteKit
 class Background: SKSpriteNode {
     let textureAtlas = SKTextureAtlas(named: "Background")
     let backgroundSize = CGSize(width: 1024, height: 768)
+    var currentPositionY: CGFloat = 0
     
     public func spawn(parentNode: SKNode, imageName: String) {
         self.anchorPoint = CGPoint.zero
@@ -28,5 +29,13 @@ class Background: SKSpriteNode {
             self.addChild(bgNode)
         }
     
+    }
+    
+    public func updateBackground(playerPositionY: CGFloat) {
+        let deltaY = playerPositionY - currentPositionY
+        if deltaY > backgroundSize.height {
+            currentPositionY = playerPositionY
+            self.position.y = currentPositionY
+        }
     }
 }
