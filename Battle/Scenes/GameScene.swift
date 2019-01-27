@@ -222,11 +222,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if shooter == .friendly {
             guard enemy != nil else { return }
             turret.aimAt(self.enemy) { [unowned self, unowned turret] in
+                guard self.enemy != nil else { return }
                 self.turretFire(turret: turret, target: self.enemy, shooter: shooter)
             }
         } else {
             guard tank != nil else { return }
             turret.aimAt(self.tank) { [unowned self, unowned turret] in
+                guard self.tank != nil else { return }
                 self.turretFire(turret: turret, target: self.tank, shooter: shooter)
             }
         }

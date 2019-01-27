@@ -20,8 +20,8 @@ class HUD: SKSpriteNode {
     private var enemyTurnIndicatorNode: SKSpriteNode!
     private var powerupNode: SKSpriteNode!
     
-    var player: Tank!
-    var enemyTank: Tank!
+    weak var player: Tank!
+    weak var enemyTank: Tank!
     let dangerLevel: Int = 25
     
     init(playerTank: Tank, enemyTank: Tank) {

@@ -14,7 +14,7 @@ class Level {
     private var turrets: [Turret] = []
     public var numberOfTurrets: Int = 2
     
-    public var numberOfPowerups: Int = 2
+    public var numberOfPowerups: Int = 1
     private var powerupYpositions: [CGFloat] = []
     
     private var lastPowerupSprite: PowerupSprite!
@@ -111,7 +111,9 @@ class Level {
         for turret in turrets {
             addDisappearSmoke(atPosition: turret.position)
             turret.removeFromParent()
+            turret.targetAcquiredHandler = nil 
         }
+        turrets = []
     }
     
     public func removePowerups() {

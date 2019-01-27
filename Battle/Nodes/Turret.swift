@@ -23,7 +23,7 @@ class Turret: SKSpriteNode {
     
     private var currentTarget: Tank? = nil
     private var canFire: Bool = false
-    private var targetAcquiredHandler: (() -> Void)? = nil
+    public var targetAcquiredHandler: (() -> Void)? = nil
     
     public var didFire: Observable<Target> = Observable(Target(shooter: .friendly, wasHit: false))
     

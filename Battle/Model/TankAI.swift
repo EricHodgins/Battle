@@ -30,7 +30,6 @@ class TankAI {
     
     private func setupHumanObserver() {
         guard let human = human else { fatalError("human was never found in gamescene") }
-        
         human.didFireAtPoint.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self] (pointOffScreen, change) in
             self.computer?.canShoot = true
             let fromPt = self.human.firingPoint()
@@ -48,7 +47,7 @@ class TankAI {
         let xIntersect: CGFloat
         
         fire(computer, fireAtHuman: human)
-        
+        return // MARK: - debugging
         if from.x < point.x {
             xIntersect = from.x + ((computer.position.y - from.y) / tan(MathHelper.angle(fromOrigin: from, toPoint: point)))
         } else {
@@ -108,7 +107,7 @@ class TankAI {
     
     public func setupTurretsObserver() {
         guard let level = gameScene.level else { fatalError() }
-        
+
         let turrets = level.getTurrets()
         for turret in turrets {
             turret.didFire.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self, unowned turret] (target, _) in
