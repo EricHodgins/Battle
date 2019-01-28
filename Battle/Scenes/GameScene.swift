@@ -183,6 +183,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 } else if tank.type == .enemy {
                     tank.hasBeenHitBy(projectile: projectile, contact: contact) { [unowned self] health in
                         if health <= 0 {
+                            self.enemy.removeFromParent()
                             self.enemy = nil
                             self.tank.hasDefeatedEnemy = true
                             self.level.removeTurrets()

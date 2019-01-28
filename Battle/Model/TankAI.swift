@@ -11,8 +11,8 @@ import GameplayKit.GKRandomSource
 
 class TankAI {
     weak private var gameScene: GameScene!
-    private let human: Tank!
-    private let computer: Tank!
+    public weak var human: Tank!
+    public weak var computer: Tank!
     
     init(gameScene: GameScene) {
         self.gameScene = gameScene
@@ -31,14 +31,15 @@ class TankAI {
     private func setupHumanObserver() {
         guard let human = human else { fatalError("human was never found in gamescene") }
         human.didFireAtPoint.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self] (pointOffScreen, change) in
-            self.computer?.canShoot = true
+            guard self.computer != nil else { return }
+            self.computer.canShoot = true
             let fromPt = self.human.firingPoint()
             self.reactToHumanDidFire(atPoint: pointOffScreen, from: fromPt)
         }
     }
     
     private func updateTankStates() {
-        computer.canShoot = false
+        computer?.canShoot = false
         human.canShoot = true
     }
     

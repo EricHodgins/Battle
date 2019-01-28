@@ -78,6 +78,7 @@ class Tank: SKSpriteNode {
         
         if self.hasDefeatedEnemy {
             self.physicsBody?.velocity.dy = CGFloat(movingSpeed) / 4
+            canShoot = true
         }
     }
     
