@@ -20,6 +20,8 @@ class Level {
     private var lastPowerupSprite: PowerupSprite!
     private let powerupSpawnTime: TimeInterval = 5.0
     
+    public var roundComplete: Bool = false
+    
     init(gameScene: GameScene) {
         self.gameScene = gameScene
         buildLevel()
@@ -65,6 +67,16 @@ class Level {
         for turret in turrets {
             turret.update(currentTime, timeDelta: timeDelta)
         }
+        
+        if roundComplete {
+            for turret in turrets {
+                addDisappearSmoke(atPosition: turret.position)
+                turret.removeFromParent()
+                turret.targetAcquiredHandler = nil
+            }
+            roundComplete = false
+            turrets = []
+        }
     }
     
     public func moveTurrets() {
@@ -108,12 +120,12 @@ class Level {
     }
     
     public func removeTurrets() {
-        for turret in turrets {
-            addDisappearSmoke(atPosition: turret.position)
-            turret.removeFromParent()
-            turret.targetAcquiredHandler = nil 
-        }
-        turrets = []
+//        for turret in turrets {
+//            addDisappearSmoke(atPosition: turret.position)
+//            turret.removeFromParent()
+//            turret.targetAcquiredHandler = nil
+//        }
+//        turrets = []
     }
     
     public func removePowerups() {
