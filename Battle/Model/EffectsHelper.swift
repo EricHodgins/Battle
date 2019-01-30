@@ -29,4 +29,9 @@ class EffectsHelper {
         let seq = SKAction.sequence(actions)
         node.run(seq)
     }
+    
+    public static func randomScale(withMinimum min: Float) -> CGFloat {
+        let scaleFactor = Float.random(in: min ... 1.0)
+        return CGFloat(scaleFactor)
+    }
 }

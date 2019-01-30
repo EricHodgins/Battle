@@ -100,8 +100,10 @@ class Level {
         let cam = gamescene.cam
         let boulder = Boulder()
         let yPosition = cam.position.y + (gamescene.size.height / 2) + 100
-        boulder.position = CGPoint(x: cam.position.x, y: yPosition)
+        let randomScale = EffectsHelper.randomScale(withMinimum: 0.3)
+        boulder.position = CGPoint(x: randomXposition(), y: yPosition)
         gamescene.addChild(boulder)
+        boulder.setScale(randomScale)
     }
     
     public func moveTurrets() {

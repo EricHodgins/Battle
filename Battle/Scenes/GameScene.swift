@@ -75,7 +75,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         background.spawn(parentNode: self, imageName: "background_main")
         
-        boundary.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(origin: CGPoint(x: 0, y: (cam.position.y) - self.size.height/2), size: self.size))
+        let boundarySize = CGSize(width: self.size.width, height: self.size.height + 500)
+        let origin = CGPoint(x: 0, y: (cam.position.y) - self.size.height/2 - 250)
+        boundary.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(origin: origin, size: boundarySize))
         boundary.physicsBody?.categoryBitMask = PhysicsCategory.boundary.rawValue
         
         self.addChild(boundary)
@@ -154,6 +156,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        let projectileMask = PhysicsCategory.projectile.rawValue
+        let tankMask = PhysicsCategory.tank.rawValue
+        let obstacleMask = PhysicsCategory.obstacle.rawValue
+        
+        if (contact.bodyA.categoryBitMask & projectileMask) > 0 || (contact.bodyB.categoryBitMask & projectileMask) > 0 {
+            handleProjectile(contact: contact)
+        }
+        
+        if (contact.bodyA.categoryBitMask & tankMask) > 0 || (contact.bodyB.categoryBitMask & tankMask) > 0 {
+            handleTank(contact: contact)
+        }
+        
+        if (contact.bodyA.categoryBitMask & obstacleMask) > 0 || (contact.bodyB.categoryBitMask & obstacleMask) > 0 {
+            handleObstacle(contact: contact)
+        }
+    }
+    
+    private func handleProjectile(contact: SKPhysicsContact) {
         let otherBody: SKPhysicsBody
         let projectileBody: SKPhysicsBody
         let projectileMask = PhysicsCategory.projectile.rawValue
@@ -216,9 +236,65 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 projectile.removeFromParent()
                 powerupNode.removeFromParent()
+            case PhysicsCategory.obstacle.rawValue:
+                print("projectile hit boulder")
+                let boulder = otherBody.node as! Boulder
+                boulder.hasBeenHit(contactPoint: contact.contactPoint)
+                projectile.removeFromParent()
             default:
                 print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
             }
+        }
+    }
+    
+    private func handleTank(contact: SKPhysicsContact) {
+        let otherBody: SKPhysicsBody
+        let tankBody: SKPhysicsBody
+        let tankMask = PhysicsCategory.tank.rawValue
+        
+        if (contact.bodyA.categoryBitMask & tankMask) > 0 {
+            otherBody = contact.bodyB
+            tankBody = contact.bodyA
+        } else {
+            otherBody = contact.bodyA
+            tankBody = contact.bodyB
+        }
+        
+        if let tank = tankBody.node as? Tank {
+            switch otherBody.categoryBitMask {
+            case PhysicsCategory.obstacle.rawValue:
+                EffectsHelper.screenShake(node: self.camera!, duration: 3)
+                let boulder = otherBody.node as! Boulder
+                tank.hasBeenHitBy(obstacle: boulder, contact: contact) { (health) in
+                    if health <= 0 {
+                        //MARK: - TODO
+                    }
+                }
+            default:
+                print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: tankBody.node?.name)) ")
+            }
+        }
+        
+    }
+    
+    private func handleObstacle(contact: SKPhysicsContact) {
+        let otherBody: SKPhysicsBody
+        let obstacleBody: SKPhysicsBody
+        let obstacleMask = PhysicsCategory.obstacle.rawValue
+        
+        if (contact.bodyA.categoryBitMask & obstacleMask) > 0 {
+            otherBody = contact.bodyB
+            obstacleBody = contact.bodyA
+        } else {
+            otherBody = contact.bodyA
+            obstacleBody = contact.bodyB
+        }
+        
+        switch otherBody.categoryBitMask {
+        case PhysicsCategory.boundary.rawValue:
+            obstacleBody.node?.removeFromParent()
+        default:
+            print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: obstacleBody.node?.name)) ")
         }
     }
     

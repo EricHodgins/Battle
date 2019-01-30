@@ -33,6 +33,7 @@ class Tank: SKSpriteNode {
     }
     
     private var lastProjectile: Projectile!
+    private var lastObstacle: Boulder!
     private var lastPowerupNode: SKSpriteNode!
     public var wasHit: Observable<TankHit> = Observable(TankHit(health: 100))
     
@@ -77,7 +78,7 @@ class Tank: SKSpriteNode {
         }
         
         if self.hasDefeatedEnemy {
-            self.physicsBody?.velocity.dy = CGFloat(movingSpeed) / 4
+            self.physicsBody?.velocity.dy = CGFloat(movingSpeed)
             canShoot = true
         }
     }
@@ -165,20 +166,32 @@ class Tank: SKSpriteNode {
             self.physicsBody?.categoryBitMask = PhysicsCategory.tankRecoverMode.rawValue
             
             lastProjectile = projectile
-            if health == 100 {
-                health -= 50
-            } else {
-                health -= 25
-            }
-            
-            if health <= 0 {
-                tankDefeatedExplosion(contact: contact)
-            } else {
-                tankHitExplosion(contact: contact)
-            }
-            
-            completion(self.health)
+            updateHealth(contact: contact, completion: completion)
         }
+    }
+    
+    public func hasBeenHitBy(obstacle: Boulder, contact: SKPhysicsContact, completion: ((_ health: Int) -> Void)) {
+        if lastObstacle != obstacle {
+            self.physicsBody?.categoryBitMask = PhysicsCategory.tankRecoverMode.rawValue
+            lastObstacle = obstacle
+            updateHealth(contact: contact, completion: completion)
+        }
+    }
+    
+    private func updateHealth(contact: SKPhysicsContact, completion: ((_ health: Int) -> Void)) {
+        if health == 100 {
+            health -= 50
+        } else {
+            health -= 25
+        }
+        
+        if health <= 0 {
+            tankDefeatedExplosion(contact: contact)
+        } else {
+            tankHitExplosion(contact: contact)
+        }
+        
+        completion(self.health)
     }
     
     public func addPowerup(powerup: SKSpriteNode) {
