@@ -186,7 +186,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             self.enemy.removeFromParent()
                             self.enemy = nil
                             self.tank.hasDefeatedEnemy = true
-                            //self.level.removeTurrets()
                             let delay = SKAction.wait(forDuration: 0.1)
                             self.run(delay, completion: { [unowned self] in
                                 self.level.roundComplete = true

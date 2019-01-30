@@ -139,7 +139,7 @@ class Turret: SKSpriteNode {
         explosion.position = gamescene.convert(contactPoint, to: self)
         explosion.zPosition = 10
         explosion.targetNode = self
-        //self.parent!.addChild(explosion)
+        
         self.addChild(explosion)
         let delay = SKAction.wait(forDuration: 3.0)
         self.run(delay) {

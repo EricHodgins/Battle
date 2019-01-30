@@ -18,6 +18,7 @@ enum PhysicsCategory: UInt32 {
     case turret = 8
     case powerup = 16
     case tankRecoverMode = 32
+    case obstacle = 64
 }
 
 enum Shooter {

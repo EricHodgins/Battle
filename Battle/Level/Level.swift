@@ -19,6 +19,9 @@ class Level {
     
     private var lastPowerupSprite: PowerupSprite!
     private let powerupSpawnTime: TimeInterval = 5.0
+    private var tankIsInMotion: Bool = false
+    private var obstacleSpawnTime: TimeInterval = 8.0
+    private var lastObstacleSpawnTime: TimeInterval = 0.0
     
     public var roundComplete: Bool = false
     
@@ -75,8 +78,30 @@ class Level {
                 turret.targetAcquiredHandler = nil
             }
             roundComplete = false
+            tankIsInMotion = true
             turrets = []
         }
+        
+        if tankIsInMotion {
+            if lastObstacleSpawnTime == 0.0 {
+                lastObstacleSpawnTime = currentTime
+            }
+            
+            if (currentTime - lastObstacleSpawnTime) > obstacleSpawnTime {
+                lastObstacleSpawnTime = currentTime
+                spawnObstacle()
+            }
+        }
+    }
+    
+    private func spawnObstacle() {
+        guard let gamescene = self.gameScene  else { return }
+        
+        let cam = gamescene.cam
+        let boulder = Boulder()
+        let yPosition = cam.position.y + (gamescene.size.height / 2) + 100
+        boulder.position = CGPoint(x: cam.position.x, y: yPosition)
+        gamescene.addChild(boulder)
     }
     
     public func moveTurrets() {
@@ -117,15 +142,6 @@ class Level {
         case .tripleBullet:
             return PowerupTripleBullet()
         }
-    }
-    
-    public func removeTurrets() {
-//        for turret in turrets {
-//            addDisappearSmoke(atPosition: turret.position)
-//            turret.removeFromParent()
-//            turret.targetAcquiredHandler = nil
-//        }
-//        turrets = []
     }
     
     public func removePowerups() {
