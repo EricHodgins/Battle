@@ -20,7 +20,7 @@ class Level {
     private var lastPowerupSprite: PowerupSprite!
     private let powerupSpawnTime: TimeInterval = 5.0
     private var tankIsInMotion: Bool = false
-    private var obstacleSpawnTime: TimeInterval = 8.0
+    private var obstacleSpawnTime: TimeInterval = 1.0
     private var lastObstacleSpawnTime: TimeInterval = 0.0
     
     public var roundComplete: Bool = false

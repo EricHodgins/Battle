@@ -8,20 +8,12 @@
 
 import SpriteKit
 
-class Boulder: SKSpriteNode {
+class Boulder: ObstacleSprite {
     var initialSize: CGSize = CGSize(width: 70, height: 74)
-    var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Obstacles")
-    
+
     init() {
-        let texture = textureAtlas.textureNamed("boulder")
-        super.init(texture: texture, color: .clear, size: initialSize)
-        
-        self.physicsBody = SKPhysicsBody(texture: texture, size: initialSize)
-        self.physicsBody?.categoryBitMask = PhysicsCategory.obstacle.rawValue
-        self.physicsBody?.collisionBitMask = 0
-        self.physicsBody?.contactTestBitMask = PhysicsCategory.tank.rawValue | PhysicsCategory.boundary.rawValue
-        self.physicsBody?.affectedByGravity = false
-        self.name = "boulder"
+        super.init(size: initialSize, textureName: "boulder")
+        self.name = "obstacle_boulder"
     }
     
     required init?(coder aDecoder: NSCoder) {

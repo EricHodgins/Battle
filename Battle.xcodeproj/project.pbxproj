@@ -29,6 +29,8 @@
 		7A32295921FC04CB00BA4165 /* TurretHit.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A32295821FC04CB00BA4165 /* TurretHit.sks */; };
 		7A32295B21FD240E00BA4165 /* DisappearSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A32295A21FD240E00BA4165 /* DisappearSmoke.sks */; };
 		7A32295E2200021400BA4165 /* Boulder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295D2200021400BA4165 /* Boulder.swift */; };
+		7A3229602202A2D900BA4165 /* WoodStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295F2202A2D900BA4165 /* WoodStack.swift */; };
+		7A3229642202A32E00BA4165 /* ObstacleSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3229632202A32E00BA4165 /* ObstacleSprite.swift */; };
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
@@ -85,6 +87,8 @@
 		7A32295821FC04CB00BA4165 /* TurretHit.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TurretHit.sks; sourceTree = "<group>"; };
 		7A32295A21FD240E00BA4165 /* DisappearSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DisappearSmoke.sks; sourceTree = "<group>"; };
 		7A32295D2200021400BA4165 /* Boulder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boulder.swift; sourceTree = "<group>"; };
+		7A32295F2202A2D900BA4165 /* WoodStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodStack.swift; sourceTree = "<group>"; };
+		7A3229632202A32E00BA4165 /* ObstacleSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleSprite.swift; sourceTree = "<group>"; };
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -170,7 +174,9 @@
 		7A32295C2200012B00BA4165 /* Obstacles */ = {
 			isa = PBXGroup;
 			children = (
+				7A3229632202A32E00BA4165 /* ObstacleSprite.swift */,
 				7A32295D2200021400BA4165 /* Boulder.swift */,
+				7A32295F2202A2D900BA4165 /* WoodStack.swift */,
 			);
 			path = Obstacles;
 			sourceTree = "<group>";
@@ -391,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AA2F58221E5819C0002331B /* GameDirector.swift in Sources */,
+				7A3229602202A2D900BA4165 /* WoodStack.swift in Sources */,
 				7AA2F55021E422580002331B /* GameScene.swift in Sources */,
 				7AA2F57221E44C170002331B /* MenuScene.swift in Sources */,
 				7A32293521ED981300BA4165 /* HUD.swift in Sources */,
@@ -407,6 +414,7 @@
 				7A32292F21EBD67000BA4165 /* Control.swift in Sources */,
 				7A32294D21F8295800BA4165 /* PowerupHealthBoost.swift in Sources */,
 				7A32294F21F8296600BA4165 /* PowerupMoveTurrets.swift in Sources */,
+				7A3229642202A32E00BA4165 /* ObstacleSprite.swift in Sources */,
 				7AA2F58021E57F4F0002331B /* Types.swift in Sources */,
 				7AA2F55221E422580002331B /* GameViewController.swift in Sources */,
 				7AA2F57A21E52D160002331B /* Projectile.swift in Sources */,
