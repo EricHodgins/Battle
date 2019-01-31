@@ -98,12 +98,21 @@ class Level {
         guard let gamescene = self.gameScene  else { return }
         
         let cam = gamescene.cam
-        let boulder = Boulder()
         let yPosition = cam.position.y + (gamescene.size.height / 2) + 100
-        let randomScale = EffectsHelper.randomScale(withMinimum: 0.3)
-        boulder.position = CGPoint(x: randomXposition(), y: yPosition)
-        gamescene.addChild(boulder)
-        boulder.setScale(randomScale)
+        let randInt = EffectsHelper.randomInt(max: 100)
+        if randInt % 2 == 0 {
+            let boulder = Boulder()
+            let randomScale = EffectsHelper.randomScale(withMinimum: 0.3)
+            boulder.position = CGPoint(x: randomXposition(), y: yPosition)
+            gamescene.addChild(boulder)
+            boulder.setScale(randomScale)
+        } else {
+            let woodStack = WoodStack()
+            let randomScale = EffectsHelper.randomScale(withMinimum: 0.3)
+            woodStack.position = CGPoint(x: randomXposition(), y: yPosition)
+            gamescene.addChild(woodStack)
+            woodStack.setScale(randomScale)
+        }
     }
     
     public func moveTurrets() {

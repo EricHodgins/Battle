@@ -34,4 +34,10 @@ class EffectsHelper {
         let scaleFactor = Float.random(in: min ... 1.0)
         return CGFloat(scaleFactor)
     }
+    
+    public static func randomInt(max: Int) -> Int {
+        let randomSource = GKRandomSource.sharedRandom()
+        let randInt = randomSource.nextInt(upperBound: max)
+        return randInt
+    }
 }

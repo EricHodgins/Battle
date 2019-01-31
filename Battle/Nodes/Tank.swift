@@ -33,7 +33,7 @@ class Tank: SKSpriteNode {
     }
     
     private var lastProjectile: Projectile!
-    private var lastObstacle: Boulder!
+    private var lastObstacle: ObstacleSprite!
     private var lastPowerupNode: SKSpriteNode!
     public var wasHit: Observable<TankHit> = Observable(TankHit(health: 100))
     
@@ -170,7 +170,7 @@ class Tank: SKSpriteNode {
         }
     }
     
-    public func hasBeenHitBy(obstacle: Boulder, contact: SKPhysicsContact, completion: ((_ health: Int) -> Void)) {
+    public func hasBeenHitBy(obstacle: ObstacleSprite, contact: SKPhysicsContact, completion: ((_ health: Int) -> Void)) {
         if lastObstacle != obstacle {
             self.physicsBody?.categoryBitMask = PhysicsCategory.tankRecoverMode.rawValue
             lastObstacle = obstacle

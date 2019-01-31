@@ -237,10 +237,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 projectile.removeFromParent()
                 powerupNode.removeFromParent()
             case PhysicsCategory.obstacle.rawValue:
-                print("projectile hit boulder")
-                let boulder = otherBody.node as! Boulder
-                boulder.hasBeenHit(contactPoint: contact.contactPoint)
                 projectile.removeFromParent()
+                let obstacle = otherBody.node as! ObstacleSprite
+                guard let name = obstacle.name else { return }
+                
+                if name == "obstacle_boulder" {
+                    let boulder = otherBody.node as! Boulder
+                    boulder.hasBeenHit(contactPoint: contact.contactPoint)
+                } else if obstacle.name == "obstacle_woodstack" {
+                    let woodStack = otherBody.node as! WoodStack
+                    woodStack.removeFromParent()
+                    woodExplosion(contactPoint: contact.contactPoint)
+                }
             default:
                 print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")
             }
@@ -264,8 +272,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch otherBody.categoryBitMask {
             case PhysicsCategory.obstacle.rawValue:
                 EffectsHelper.screenShake(node: self.camera!, duration: 3)
-                let boulder = otherBody.node as! Boulder
-                tank.hasBeenHitBy(obstacle: boulder, contact: contact) { (health) in
+                let obstacle = otherBody.node as! ObstacleSprite
+                tank.hasBeenHitBy(obstacle: obstacle, contact: contact) { (health) in
                     if health <= 0 {
                         //MARK: - TODO
                     }
@@ -341,6 +349,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ])
         
         self.run(sequence)
+    }
+    
+    private func woodExplosion(contactPoint: CGPoint) {
+        guard let explosion = SKEmitterNode(fileNamed: "TurretHit") else { return }
+        explosion.position = contactPoint
+        explosion.zPosition = 10
+        explosion.targetNode = self
+        
+        self.addChild(explosion)
+        let delay = SKAction.wait(forDuration: 3.0)
+        self.run(delay) {
+            explosion.removeFromParent()
+        }
     }
     
     deinit {
