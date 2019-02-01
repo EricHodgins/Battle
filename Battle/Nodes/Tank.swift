@@ -14,6 +14,8 @@ class Tank: SKSpriteNode {
     let type: TankType!
     
     var hasDefeatedEnemy: Bool = false
+    var fireRateTimeInterval: TimeInterval = 1.0
+    var lastFireTimeInterval: TimeInterval = 0.0
     var canShoot: Bool = true {
         didSet {
             if self.health <= 0 { self.canShoot = false }
@@ -79,7 +81,16 @@ class Tank: SKSpriteNode {
         
         if self.hasDefeatedEnemy {
             self.physicsBody?.velocity.dy = CGFloat(movingSpeed)
-            canShoot = true
+            
+            if lastFireTimeInterval == 0.0 {
+                lastFireTimeInterval = currentTime
+            }
+            
+            let delta = currentTime - lastFireTimeInterval
+            if delta >= fireRateTimeInterval {
+                lastFireTimeInterval = currentTime
+                canShoot = true
+            }
         }
     }
     
@@ -107,11 +118,12 @@ class Tank: SKSpriteNode {
     }
     
     private func udpateStateForJustFired() {
-        if hasDefeatedEnemy {
-            canShoot = true
-        } else {
-            canShoot = false
-        }
+        canShoot = false
+//        if hasDefeatedEnemy {
+//            canShoot = true
+//        } else {
+//            canShoot = false
+//        }
     }
     
     public func fireStandardProjectile(point: CGPoint, screenSize: CGSize) {
