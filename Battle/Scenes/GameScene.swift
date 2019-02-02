@@ -246,8 +246,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     boulder.hasBeenHit(contactPoint: contact.contactPoint)
                 } else if obstacle.name == "obstacle_woodstack" {
                     let woodStack = otherBody.node as! WoodStack
+                    let width = woodStack.size.width
+                    let position = woodStack.position
                     woodStack.removeFromParent()
-                    woodExplosion(contactPoint: contact.contactPoint)
+                    woodExplosion(contactPoint: position, woodstackWidth: width)
                     EffectsHelper.createDebris(gameScene: self, atPosition: contact.contactPoint)
                 }
             default:
@@ -352,9 +354,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.run(sequence)
     }
     
-    private func woodExplosion(contactPoint: CGPoint) {
-        guard let explosion = SKEmitterNode(fileNamed: "TurretHit") else { return }
+    private func woodExplosion(contactPoint: CGPoint, woodstackWidth: CGFloat) {
+        guard let explosion = SKEmitterNode(fileNamed: "FireBall") else { return }
         explosion.position = contactPoint
+        explosion.particlePositionRange.dx = woodstackWidth - (woodstackWidth * 0.5)
         explosion.zPosition = 10
         explosion.targetNode = self
         

@@ -31,6 +31,7 @@
 		7A32295E2200021400BA4165 /* Boulder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295D2200021400BA4165 /* Boulder.swift */; };
 		7A3229602202A2D900BA4165 /* WoodStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295F2202A2D900BA4165 /* WoodStack.swift */; };
 		7A3229642202A32E00BA4165 /* ObstacleSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3229632202A32E00BA4165 /* ObstacleSprite.swift */; };
+		7A3229662205F76000BA4165 /* FireBall.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A3229652205F76000BA4165 /* FireBall.sks */; };
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
@@ -89,6 +90,7 @@
 		7A32295D2200021400BA4165 /* Boulder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boulder.swift; sourceTree = "<group>"; };
 		7A32295F2202A2D900BA4165 /* WoodStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodStack.swift; sourceTree = "<group>"; };
 		7A3229632202A32E00BA4165 /* ObstacleSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleSprite.swift; sourceTree = "<group>"; };
+		7A3229652205F76000BA4165 /* FireBall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireBall.sks; sourceTree = "<group>"; };
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				7A32295421FAC47600BA4165 /* PowerupHit.sks */,
 				7A32295821FC04CB00BA4165 /* TurretHit.sks */,
 				7A32295A21FD240E00BA4165 /* DisappearSmoke.sks */,
+				7A3229652205F76000BA4165 /* FireBall.sks */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				7AA2F54C21E422580002331B /* GameScene.sks in Resources */,
 				7A32292D21EAD46D00BA4165 /* Assets.xcassets in Resources */,
 				7A32295921FC04CB00BA4165 /* TurretHit.sks in Resources */,
+				7A3229662205F76000BA4165 /* FireBall.sks in Resources */,
 				7AA2F55721E422760002331B /* Assets.xcassets in Resources */,
 				7A32293921F3DFF200BA4165 /* TankHit.sks in Resources */,
 				7A32295B21FD240E00BA4165 /* DisappearSmoke.sks in Resources */,
