@@ -248,6 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let woodStack = otherBody.node as! WoodStack
                     woodStack.removeFromParent()
                     woodExplosion(contactPoint: contact.contactPoint)
+                    EffectsHelper.createDebris(gameScene: self, atPosition: contact.contactPoint)
                 }
             default:
                 print("unknown contact hit between: \(String(describing: otherBody.node?.name)) & \(String(describing: projectileBody.node?.name)) ")

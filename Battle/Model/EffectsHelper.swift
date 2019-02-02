@@ -40,4 +40,40 @@ class EffectsHelper {
         let randInt = randomSource.nextInt(upperBound: max)
         return randInt
     }
+    
+    public static func createDebris(gameScene: GameScene, atPosition point: CGPoint) {
+
+        let numberOfItems = Int.random(in: 0 ... 4)
+        
+        for _ in 0 ... numberOfItems {
+            let randomPiece = Int.random(in: 0 ... 4)
+            let imageName = "log_fragment_" + "\(randomPiece)"
+            let node = SKSpriteNode(imageNamed: imageName)
+            node.position = point
+            node.zPosition = 15
+            node.name = "debris"
+            gameScene.addChild(node)
+            
+            node.physicsBody = SKPhysicsBody(circleOfRadius: node.frame.width/2)
+            let randomDx = Int.random(in: -350 ... 350)
+            let randomDy = Int.random(in: 200 ... 500)
+            node.physicsBody?.velocity = CGVector(dx: randomDx, dy: randomDy)
+            node.physicsBody?.affectedByGravity = false
+            node.setScale(0.5)
+            
+            
+            guard let explosion = SKEmitterNode(fileNamed: "ShotFired") else { return }
+            explosion.position = CGPoint(x: 0.5, y: 0.5)
+            explosion.zPosition = 20
+            explosion.targetNode = node
+            
+            node.addChild(explosion)
+            
+            let delay = SKAction.wait(forDuration: 2.0)
+            node.run(delay) {
+                explosion.removeFromParent()
+                node.removeFromParent()
+            }
+        }
+    }
 }
