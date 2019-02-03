@@ -47,6 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(enemy)
         
         tankAI = TankAI(gameScene: self)
+        tankAI?.setupTurretsObserver()
         
         tank.physicsBody?.velocity.dy = 0.0
     }
