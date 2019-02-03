@@ -48,7 +48,7 @@ class TankAI {
         let xIntersect: CGFloat
         
         fire(computer, fireAtHuman: human)
-        return // MARK: - debugging
+        //return // MARK: - debugging
         if from.x < point.x {
             xIntersect = from.x + ((computer.position.y - from.y) / tan(MathHelper.angle(fromOrigin: from, toPoint: point)))
         } else {
@@ -113,6 +113,7 @@ class TankAI {
         for turret in turrets {
             turret.didFire.addObserver(self, removeIfExists: true, options: [.new]) { [unowned self, unowned turret] (target, _) in
                 if target.shooter == .friendly {
+                    guard self.computer != nil else { return }
                     self.reactToHumanDidFire(atPoint: self.computer.position, from: turret.position)
                 }
             }

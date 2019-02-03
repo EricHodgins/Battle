@@ -25,7 +25,7 @@ class Tank: SKSpriteNode {
         }
     }
     var direction: Direction = .idle
-    public let movingSpeed: Double = 60
+    public var movingSpeed: Double = 60
     
     var didFireAtPoint: Observable<CGPoint> = Observable(CGPoint.zero)
     public var health: Int = 100 {

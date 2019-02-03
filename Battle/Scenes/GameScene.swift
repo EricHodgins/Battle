@@ -38,12 +38,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastUpdateTime = 0.0
     }
     
+    public func reBuildEnemy() {
+        level.buildLevel()
+        
+        enemy = gameDirector.createComputerTank()
+        enemy.position = CGPoint(x: self.size.width/2, y: cam.position.y + (self.size.height / 2) - 100)
+        enemy.zRotation += .pi
+        self.addChild(enemy)
+        
+        tankAI = TankAI(gameScene: self)
+        
+        tank.physicsBody?.velocity.dy = 0.0
+    }
+    
     private func build() {
         self.camera = cam
         level = Level(gameScene: self)
         
         tank = gameDirector.createHumanTank()
         enemy = gameDirector.createComputerTank()
+        enemy.movingSpeed = 20
         
         tank.position = CGPoint(x: self.size.width/2, y: tankInitialYpos)
         enemy.position = CGPoint(x: self.size.width/2, y: self.size.height - 100)
@@ -99,7 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let touch = touches.first {
             let touchedPt = touch.location(in: self)
             let node = atPoint(touchedPt)
-            if touchedPt.y >= tank.position.y {
+            if touchedPt.y >= tank.position.y + 100 {
                 tank.fireTowards(point: touchedPt, screenSize: self.size)
             } else if node.name == "player_control" {
                 node.convert(touchedPt, to: self)
@@ -113,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let touchedPt = touch.location(in: self)
-            if touchedPt.y <= tank.position.y {
+            if touchedPt.y <= tank.position.y + 100 {
                 moveTank(touchingPoint: touchedPt)
             }
         }

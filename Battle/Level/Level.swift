@@ -25,6 +25,9 @@ class Level {
     
     public var roundComplete: Bool = false
     
+    private var lastTankIsInMotionTimeInterval: TimeInterval = 0.0
+    private var tankIsInMotionDuration: TimeInterval = 10.0
+    
     init(gameScene: GameScene) {
         self.gameScene = gameScene
         buildLevel()
@@ -34,14 +37,21 @@ class Level {
         return turrets
     }
     
-    private func buildLevel() {
+    public func buildLevel() {
         guard let gameScene = self.gameScene else { fatalError() }
         
         let heightDiff = (gameScene.size.height * (2 / 3)) - (gameScene.size.height * (1 / 3))
         let verticalSpacing: CGFloat = heightDiff / CGFloat(numberOfTurrets + numberOfPowerups - 1)
+        let adjustedYPositionForCam: CGFloat
+        if gameScene.cam.position.y <= 0 {
+            adjustedYPositionForCam = gameScene.size.height / 2
+        } else {
+            adjustedYPositionForCam = gameScene.cam.position.y
+        }
+        
         for i in stride(from: 0, to: numberOfTurrets + numberOfPowerups, by: 1) {
             if i % 2 != 0 {
-                let randomYpos = gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing)
+                let randomYpos = adjustedYPositionForCam - (gameScene.size.height / 2) + (gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing)) //+ gameScene.cam.position.y - (gameScene.size.height / 2)
                 powerupYpositions.append(randomYpos)
                 let powerupTripleBullet = PowerupTripleBullet()
                 powerupTripleBullet.position = CGPoint(x: randomXposition(), y: randomYpos)
@@ -49,7 +59,7 @@ class Level {
             } else {
                 let turret = Turret()
                 turret.position.x = randomXposition()
-                turret.position.y = gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing)
+                turret.position.y = adjustedYPositionForCam - (gameScene.size.height / 2) + gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing) //+ gameScene.cam.position.y - (gameScene.size.height / 2)
                 turrets.append(turret)
                 gameScene.addChild(turret)
             }
@@ -83,13 +93,32 @@ class Level {
         }
         
         if tankIsInMotion {
+            
+            if lastTankIsInMotionTimeInterval == 0.0 {
+                lastTankIsInMotionTimeInterval = currentTime
+            }
+            
             if lastObstacleSpawnTime == 0.0 {
                 lastObstacleSpawnTime = currentTime
             }
             
+            // 1. Spawn obstacle
             if (currentTime - lastObstacleSpawnTime) > obstacleSpawnTime {
                 lastObstacleSpawnTime = currentTime
                 spawnObstacle()
+            }
+            
+            // 2. Check tank is in motion time duration
+            if (currentTime - lastTankIsInMotionTimeInterval) > tankIsInMotionDuration {
+                guard let gamescene = gameScene else { return }
+                let tank = gamescene.tank!
+                tankIsInMotion = false
+                tank.hasDefeatedEnemy = false
+                removeObstacles()
+                removePowerups()
+                gamescene.reBuildEnemy()
+                
+                lastTankIsInMotionTimeInterval = 0.0
             }
         }
     }
@@ -152,6 +181,15 @@ class Level {
             return PowerupMoveTurrets()
         case .tripleBullet:
             return PowerupTripleBullet()
+        }
+    }
+    
+    public func removeObstacles() {
+        guard let gamescene = gameScene else { return }
+        
+        gamescene.enumerateChildNodes(withName: "obstacle*") { [unowned self] (node, _) in
+            self.addDisappearSmoke(atPosition: node.position)
+            node.removeFromParent()
         }
     }
     
