@@ -43,7 +43,7 @@ class EffectsHelper {
     
     public static func createDebris(gameScene: GameScene, atPosition point: CGPoint) {
 
-        let numberOfItems = Int.random(in: 0 ... 20)
+        let numberOfItems = Int.random(in: 0 ... 10)
         
         for _ in 0 ... numberOfItems {
             let randomPiece = Int.random(in: 0 ... 4)

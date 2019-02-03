@@ -112,6 +112,7 @@ class Level {
             if (currentTime - lastTankIsInMotionTimeInterval) > tankIsInMotionDuration {
                 guard let gamescene = gameScene else { return }
                 let tank = gamescene.tank!
+
                 tankIsInMotion = false
                 tank.hasDefeatedEnemy = false
                 removeObstacles()

@@ -24,6 +24,7 @@ class GameDirector {
         builder.addType(.friendly)
         
         let human = builder.build()
+        human.movingSpeed = 60.0
         
         return human
     }

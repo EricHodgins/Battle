@@ -42,14 +42,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         level.buildLevel()
         
         enemy = gameDirector.createComputerTank()
+        
         enemy.position = CGPoint(x: self.size.width/2, y: cam.position.y + (self.size.height / 2) - 100)
         enemy.zRotation += .pi
+        enemy.movingSpeed *= 2
         self.addChild(enemy)
         
         tankAI = TankAI(gameScene: self)
         tankAI?.setupTurretsObserver()
         
         tank.physicsBody?.velocity.dy = 0.0
+        tank.velocityDy *= 1.5
+        tank.velocityDy = min(tank.velocityDy, 80)
     }
     
     private func build() {
@@ -58,7 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         tank = gameDirector.createHumanTank()
         enemy = gameDirector.createComputerTank()
-        enemy.movingSpeed = 20
+        
         
         tank.position = CGPoint(x: self.size.width/2, y: tankInitialYpos)
         enemy.position = CGPoint(x: self.size.width/2, y: self.size.height - 100)
@@ -212,6 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     EffectsHelper.screenShake(node: self.camera!, duration: 3)
                     tank.hasBeenHitBy(projectile: projectile, contact: contact) { [unowned self] health in
                         if health <= 0 {
+                            guard self.enemy != nil else { return }
                             self.enemy.hasDefeatedEnemy = true
                         }
                     }

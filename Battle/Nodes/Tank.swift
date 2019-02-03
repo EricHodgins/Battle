@@ -25,7 +25,8 @@ class Tank: SKSpriteNode {
         }
     }
     var direction: Direction = .idle
-    public var movingSpeed: Double = 60
+    public var movingSpeed: Double = 20
+    public var velocityDy: CGFloat = 20
     
     var didFireAtPoint: Observable<CGPoint> = Observable(CGPoint.zero)
     public var health: Int = 100 {
@@ -80,7 +81,7 @@ class Tank: SKSpriteNode {
         }
         
         if self.hasDefeatedEnemy {
-            self.physicsBody?.velocity.dy = CGFloat(movingSpeed)
+            self.physicsBody?.velocity.dy = velocityDy
             
             if lastFireTimeInterval == 0.0 {
                 lastFireTimeInterval = currentTime
@@ -130,6 +131,7 @@ class Tank: SKSpriteNode {
         guard let gameScene = self.parent as? GameScene else { fatalError() }
         
         let projectile = Projectile()
+        projectile.velocity += Double(self.physicsBody!.velocity.dy)
         
         let yPosition: CGFloat
         if type == .friendly {
