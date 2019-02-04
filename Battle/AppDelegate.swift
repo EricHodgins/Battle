@@ -5,8 +5,13 @@
 //  Created by Eric Hodgins on 2019-01-07.
 //  Copyright © 2019 Eric Hodgins. All rights reserved.
 //
+/*
+App-ID: ca-app-pub-3236494717448231~1936814697
+Add Unit ID: ca-app-pub-3236494717448231/9073192399
+*/
 
 import UIKit
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-3236494717448231~1936814697")
+        
         return true
     }
 

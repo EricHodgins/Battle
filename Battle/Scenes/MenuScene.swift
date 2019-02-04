@@ -10,6 +10,8 @@ import SpriteKit
 
 class MenuScene: SKScene {
     
+    weak var viewController: GameViewController?
+    
     let textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "HUD")
     let playButton = SKSpriteNode()
     
@@ -27,6 +29,8 @@ class MenuScene: SKScene {
         playButton.name = "play"
         playButton.zPosition = 5
         self.addChild(playButton)
+        
+        viewController?.setupBannerAd()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -34,11 +38,14 @@ class MenuScene: SKScene {
             let location = touch.location(in: self)
             let nodeTouched = atPoint(location)
             if nodeTouched.name == "play" {
-                self.view?.presentScene(GameScene(size: self.size))
+                viewController?.removeBannerAd()
+                let gameScene = GameScene(size: self.size)
+                gameScene.viewController = viewController
+                self.view?.presentScene(gameScene)
             }
         }
     }
-    
+ 
     deinit {
         print("MenuScene deinit.")
     }

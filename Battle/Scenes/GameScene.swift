@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    weak var viewController: GameViewController?
     
     let cam = SKCameraNode()
     
@@ -146,7 +147,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     public func goToMenuScene() {
-        self.view?.presentScene(MenuScene(size: self.size))
+        let menuScene = MenuScene(size: self.size)
+        menuScene.viewController = viewController
+        self.view?.presentScene(menuScene)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

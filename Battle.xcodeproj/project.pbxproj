@@ -32,6 +32,8 @@
 		7A3229602202A2D900BA4165 /* WoodStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32295F2202A2D900BA4165 /* WoodStack.swift */; };
 		7A3229642202A32E00BA4165 /* ObstacleSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3229632202A32E00BA4165 /* ObstacleSprite.swift */; };
 		7A3229662205F76000BA4165 /* FireBall.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A3229652205F76000BA4165 /* FireBall.sks */; };
+		7A3229692207B07C00BA4165 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3229682207B07C00BA4165 /* StoreKit.framework */; };
+		7A32296B2207B11D00BA4165 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A32296A2207B11D00BA4165 /* GoogleMobileAds.framework */; };
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
@@ -91,6 +93,8 @@
 		7A32295F2202A2D900BA4165 /* WoodStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodStack.swift; sourceTree = "<group>"; };
 		7A3229632202A32E00BA4165 /* ObstacleSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleSprite.swift; sourceTree = "<group>"; };
 		7A3229652205F76000BA4165 /* FireBall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireBall.sks; sourceTree = "<group>"; };
+		7A3229682207B07C00BA4165 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7A32296A2207B11D00BA4165 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A32296B2207B11D00BA4165 /* GoogleMobileAds.framework in Frameworks */,
+				7A3229692207B07C00BA4165 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,12 +190,22 @@
 			path = Obstacles;
 			sourceTree = "<group>";
 		};
+		7A3229672207B07C00BA4165 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A32296A2207B11D00BA4165 /* GoogleMobileAds.framework */,
+				7A3229682207B07C00BA4165 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7AA2F53D21E422580002331B = {
 			isa = PBXGroup;
 			children = (
 				7AA2F54821E422580002331B /* Battle */,
 				7AA2F56321E422770002331B /* BattleTests */,
 				7AA2F54721E422580002331B /* Products */,
+				7A3229672207B07C00BA4165 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -338,6 +354,11 @@
 				TargetAttributes = {
 					7AA2F54521E422580002331B = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					7AA2F55F21E422770002331B = {
 						CreatedOnToolsVersion = 10.1;
@@ -594,6 +615,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E3QZ6M9437;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Battle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -612,6 +637,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E3QZ6M9437;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Battle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
