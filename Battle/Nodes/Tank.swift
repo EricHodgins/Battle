@@ -9,6 +9,8 @@
 import SpriteKit
 
 class Tank: SKSpriteNode {
+    static var enemyMovingSpeed: Double = 20
+    
     var initialSize: CGSize = CGSize(width: 66, height: 45)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
     let type: TankType!

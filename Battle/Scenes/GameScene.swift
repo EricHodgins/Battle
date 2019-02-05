@@ -46,7 +46,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         enemy.position = CGPoint(x: self.size.width/2, y: cam.position.y + (self.size.height / 2) - 100)
         enemy.zRotation += .pi
-        enemy.movingSpeed *= 2
+        Tank.enemyMovingSpeed *= 2
+        enemy.movingSpeed = Tank.enemyMovingSpeed
         self.addChild(enemy)
         
         tankAI = TankAI(gameScene: self)
