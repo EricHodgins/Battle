@@ -49,6 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Tank.enemyMovingSpeed *= 2
         enemy.movingSpeed = Tank.enemyMovingSpeed
         self.addChild(enemy)
+        tank.canShoot = true
         
         tankAI = TankAI(gameScene: self)
         tankAI?.setupTurretsObserver()

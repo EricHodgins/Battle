@@ -26,7 +26,7 @@ class Level {
     public var roundComplete: Bool = false
     
     private var lastTankIsInMotionTimeInterval: TimeInterval = 0.0
-    private var tankIsInMotionDuration: TimeInterval = 10.0
+    private var tankIsInMotionDuration: TimeInterval = 100.0
     
     init(gameScene: GameScene) {
         self.gameScene = gameScene
