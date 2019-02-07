@@ -43,7 +43,7 @@ class EffectsHelper {
     
     public static func createDebris(gameScene: GameScene, atPosition point: CGPoint) {
 
-        let numberOfItems = Int.random(in: 0 ... 10)
+        let numberOfItems = Int.random(in: 0 ... 5)
         
         for _ in 0 ... numberOfItems {
             let randomPiece = Int.random(in: 0 ... 4)
@@ -60,14 +60,6 @@ class EffectsHelper {
             node.physicsBody?.velocity = CGVector(dx: randomDx, dy: randomDy)
             node.physicsBody?.affectedByGravity = false
             node.setScale(0.25)
-            
-            
-//            guard let explosion = SKEmitterNode(fileNamed: "FireBall") else { return }
-//            explosion.position = CGPoint(x: 0.5, y: 0.5)
-//            explosion.zPosition = 20
-//            explosion.targetNode = node
-            
-//            node.addChild(explosion)
             
             let delay = SKAction.wait(forDuration: 1.0)
             node.run(delay) {

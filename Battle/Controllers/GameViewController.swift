@@ -20,6 +20,7 @@ protocol AdMobViewable: class {
 class GameViewController: UIViewController {
     
     var bannerView: GADBannerView!
+    public var showAdBanner = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +35,6 @@ class GameViewController: UIViewController {
         
         menuScene.size = view.bounds.size
         view.presentScene(menuScene)
-        
-        //setupBannerAd()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,8 +69,9 @@ class GameViewController: UIViewController {
 
 extension GameViewController: GADBannerViewDelegate {
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("adViewReceived")
-        addBannerView(bannerView)
+        if showAdBanner {
+            addBannerView(bannerView)
+        }
     }
     
     private func addBannerView(_ bannerView: GADBannerView) {

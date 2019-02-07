@@ -28,7 +28,7 @@ class Tank: SKSpriteNode {
     }
     var direction: Direction = .idle
     public var movingSpeed: Double = 20
-    public var velocityDy: CGFloat = 60
+    public var velocityDy: CGFloat = 80
     
     var didFireAtPoint: Observable<CGPoint> = Observable(CGPoint.zero)
     public var health: Int = 100 {
@@ -122,11 +122,6 @@ class Tank: SKSpriteNode {
     
     private func udpateStateForJustFired() {
         canShoot = false
-//        if hasDefeatedEnemy {
-//            canShoot = true
-//        } else {
-//            canShoot = false
-//        }
     }
     
     public func fireStandardProjectile(point: CGPoint, screenSize: CGSize) {

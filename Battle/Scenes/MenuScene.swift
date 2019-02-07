@@ -16,6 +16,7 @@ class MenuScene: SKScene {
     let playButton = SKSpriteNode()
     
     override func didMove(to view: SKView) {
+        self.backgroundColor = UIColor.black
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         let title = SKLabelNode(fontNamed: "Arial Rounded MT Bold")
@@ -30,6 +31,7 @@ class MenuScene: SKScene {
         playButton.zPosition = 5
         self.addChild(playButton)
         
+        viewController?.showAdBanner = true
         viewController?.setupBannerAd()
     }
     
@@ -39,6 +41,7 @@ class MenuScene: SKScene {
             let nodeTouched = atPoint(location)
             if nodeTouched.name == "play" {
                 viewController?.removeBannerAd()
+                viewController?.showAdBanner = false
                 let gameScene = GameScene(size: self.size)
                 gameScene.viewController = viewController
                 self.view?.presentScene(gameScene)

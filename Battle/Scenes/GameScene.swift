@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tankAI?.setupTurretsObserver()
         
         tank.physicsBody?.velocity.dy = 0.0
-        tank.velocityDy *= 1.5
+        tank.velocityDy += 10
         tank.velocityDy = min(tank.velocityDy, 80)
     }
     
@@ -145,7 +145,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tank.direction = .idle
         leftControl.isIdle()
         rightControl.isIdle()
-        //goToMenuScene()
     }
     
     public func goToMenuScene() {
