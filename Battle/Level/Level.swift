@@ -24,9 +24,10 @@ class Level {
     private var lastObstacleSpawnTime: TimeInterval = 0.0
     
     public var roundComplete: Bool = false
+    private var round: Int = 0
     
     private var lastTankIsInMotionTimeInterval: TimeInterval = 0.0
-    private var tankIsInMotionDuration: TimeInterval = 45.0
+    private var tankIsInMotionDuration: TimeInterval = 5.0
     
     init(gameScene: GameScene) {
         self.gameScene = gameScene
@@ -39,6 +40,8 @@ class Level {
     
     public func buildLevel() {
         guard let gameScene = self.gameScene else { fatalError() }
+        round += 1
+        showRound()
         
         let heightDiff = (gameScene.size.height * (2 / 3)) - (gameScene.size.height * (1 / 3))
         let verticalSpacing: CGFloat = heightDiff / CGFloat(numberOfTurrets + numberOfPowerups - 1)
@@ -225,6 +228,30 @@ class Level {
             gamescene.run(delay) {
                 smoke.removeFromParent()
             }
+        }
+    }
+    
+    public func showRound() {
+        guard let gamescene = gameScene else { return }
+        var centerPosition = CGPoint(x: gamescene.cam.position.x, y: gamescene.cam.position.y)
+        
+        if gamescene.cam.position == CGPoint.zero {
+            centerPosition = CGPoint(x: gamescene.size.width/2, y: gamescene.size.height/2)
+        }
+        
+        let numberNode = SKLabelNode(fontNamed: "Arial Rounded MT Bold")
+        numberNode.text = "\(self.round)"
+        numberNode.fontSize = 80
+        numberNode.position = centerPosition
+        gamescene.addChild(numberNode)
+        
+        let fade = SKAction.fadeAlpha(to: 0.1, duration: 0.5)
+        let normal = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
+        
+        let sequence = SKAction.sequence([fade, normal])
+        let fadeInOut = SKAction.repeat(sequence, count: 5)
+        numberNode.run(fadeInOut) {
+            numberNode.removeFromParent()
         }
     }
     
