@@ -148,9 +148,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     public func goToMenuScene() {
+        saveRound()
         let menuScene = MenuScene(size: self.size)
         menuScene.viewController = viewController
         self.view?.presentScene(menuScene)
+    }
+    
+    private func saveRound() {
+        if level.isNewHighScore() {
+            // NEW RECORD !!!
+            level.saveRound()
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

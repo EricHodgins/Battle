@@ -54,7 +54,7 @@ class Level {
         
         for i in stride(from: 0, to: numberOfTurrets + numberOfPowerups, by: 1) {
             if i % 2 != 0 {
-                let randomYpos = adjustedYPositionForCam - (gameScene.size.height / 2) + (gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing)) //+ gameScene.cam.position.y - (gameScene.size.height / 2)
+                let randomYpos = adjustedYPositionForCam - (gameScene.size.height / 2) + (gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing))
                 powerupYpositions.append(randomYpos)
                 let powerupTripleBullet = PowerupTripleBullet()
                 powerupTripleBullet.position = CGPoint(x: randomXposition(), y: randomYpos)
@@ -62,7 +62,7 @@ class Level {
             } else {
                 let turret = Turret()
                 turret.position.x = randomXposition()
-                turret.position.y = adjustedYPositionForCam - (gameScene.size.height / 2) + gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing) //+ gameScene.cam.position.y - (gameScene.size.height / 2)
+                turret.position.y = adjustedYPositionForCam - (gameScene.size.height / 2) + gameScene.size.height * (1 / 3) + (CGFloat(i) * verticalSpacing)
                 turrets.append(turret)
                 gameScene.addChild(turret)
             }
@@ -253,6 +253,22 @@ class Level {
         numberNode.run(fadeInOut) {
             numberNode.removeFromParent()
         }
+    }
+    
+    public func isNewHighScore() -> Bool {
+        let userDefaults = UserDefaults.standard
+        let score = userDefaults.integer(forKey: "Round")
+        
+        if round > score {
+            return true
+        }
+        
+        return false
+    }
+    
+    public func saveRound() {
+        let defaults = UserDefaults.standard
+        defaults.set(round, forKey: "Round")
     }
     
     deinit {

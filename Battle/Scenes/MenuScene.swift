@@ -21,9 +21,16 @@ class MenuScene: SKScene {
         
         let title = SKLabelNode(fontNamed: "Arial Rounded MT Bold")
         title.text = "BATTLE"
-        title.position = CGPoint(x: 0, y: 100)
+        title.position = CGPoint(x: 0, y: 150)
         title.fontSize = 60
         self.addChild(title)
+        
+        let highScore = SKLabelNode(fontNamed: "Arial Rounded MT Bold")
+        let highest = highestRound()
+        highScore.text = "Record: \(highest)"
+        highScore.position = CGPoint(x: 0, y: title.position.y - 50)
+        highScore.fontSize = 30
+        self.addChild(highScore)
         
         playButton.texture = textureAtlas.textureNamed("play_idle")
         playButton.size = CGSize(width: 84, height: 49)
@@ -47,6 +54,12 @@ class MenuScene: SKScene {
                 self.view?.presentScene(gameScene)
             }
         }
+    }
+    
+    private func highestRound() -> Int {
+        let defaults = UserDefaults.standard
+        let round = defaults.integer(forKey: "Round") // returns 0 is key does not exist
+        return round
     }
  
     deinit {
