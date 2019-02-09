@@ -28,7 +28,7 @@ class MenuScene: SKScene {
         let highScore = SKLabelNode(fontNamed: "Arial Rounded MT Bold")
         let highest = highestRound()
         highScore.text = "Record: \(highest)"
-        highScore.position = CGPoint(x: 0, y: title.position.y - 50)
+        highScore.position = CGPoint(x: 0, y: title.position.y - 70)
         highScore.fontSize = 30
         self.addChild(highScore)
         
