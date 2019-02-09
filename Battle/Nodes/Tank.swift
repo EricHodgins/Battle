@@ -10,6 +10,8 @@ import SpriteKit
 
 class Tank: SKSpriteNode {
     static var enemyMovingSpeed: Double = 20
+    let tankHitSound = SKAction.playSoundFileNamed("TankHit.wav", waitForCompletion: false)
+    let tankShootingSound = SKAction.playSoundFileNamed("TankShooting.wav", waitForCompletion: false)
     
     var initialSize: CGSize = CGSize(width: 66, height: 45)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
@@ -110,6 +112,7 @@ class Tank: SKSpriteNode {
     public func fireTowards(point: CGPoint, screenSize: CGSize) {
         if canShoot {
             udpateStateForJustFired()
+            self.run(tankShootingSound)
             if powerups.count > 0 {
                 let powerup = powerups.removeFirst()
                 powerup.activate(tank: self, pointFiredAt: point, screenSize: screenSize)
@@ -174,6 +177,7 @@ class Tank: SKSpriteNode {
     
     public func hasBeenHitBy(projectile: Projectile, contact: SKPhysicsContact, completion: ((_ health: Int) -> Void)) {
         if lastProjectile != projectile {
+            self.run(tankHitSound)
             self.physicsBody?.categoryBitMask = PhysicsCategory.tankRecoverMode.rawValue
             
             lastProjectile = projectile

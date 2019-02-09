@@ -10,6 +10,8 @@ import SpriteKit
 
 class Turret: SKSpriteNode {
     
+    let turretHitSound = SKAction.playSoundFileNamed("TurretHit.wav", waitForCompletion: false)
+    
     enum RotateDirection {
         case left
         case right
@@ -54,6 +56,7 @@ class Turret: SKSpriteNode {
     public func update(_ currentTime: TimeInterval, timeDelta: TimeInterval) {
         guard let target = currentTarget else { return }
         
+        playTurretMovingSound()
         var targetAngle = MathHelper.rotationAngle(fromOrigin: self.position, toPoint: target.position)
         
         targetAngle = normalizeAngle(targetAngle)
@@ -73,6 +76,10 @@ class Turret: SKSpriteNode {
                 rotateLeft(toTarget: targetAngle)
             }
         }
+    }
+    
+    private func playTurretMovingSound() {
+
     }
     
     private func rotateLeft(toTarget target: CGFloat) {
@@ -135,6 +142,8 @@ class Turret: SKSpriteNode {
     
     public func hasBeenHit(contactPoint: CGPoint) {
         guard let explosion = SKEmitterNode(fileNamed: "TurretHit") else { return }
+        self.run(turretHitSound)
+        
         let gamescene = self.parent as! GameScene
         explosion.position = gamescene.convert(contactPoint, to: self)
         explosion.zPosition = 10

@@ -34,6 +34,14 @@
 		7A3229642202A32E00BA4165 /* ObstacleSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3229632202A32E00BA4165 /* ObstacleSprite.swift */; };
 		7A3229662205F76000BA4165 /* FireBall.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A3229652205F76000BA4165 /* FireBall.sks */; };
 		7A3229692207B07C00BA4165 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3229682207B07C00BA4165 /* StoreKit.framework */; };
+		7A322975220F37D600BA4165 /* PowerupHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A32296D220F37D500BA4165 /* PowerupHit.wav */; };
+		7A322976220F37D600BA4165 /* TankHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A32296E220F37D500BA4165 /* TankHit.wav */; };
+		7A322977220F37D600BA4165 /* TankMove.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A32296F220F37D500BA4165 /* TankMove.wav */; };
+		7A322978220F37D600BA4165 /* TurretHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A322970220F37D500BA4165 /* TurretHit.wav */; };
+		7A322979220F37D600BA4165 /* HitRock.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A322971220F37D500BA4165 /* HitRock.wav */; };
+		7A32297A220F37D600BA4165 /* WoodHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A322972220F37D500BA4165 /* WoodHit.wav */; };
+		7A32297B220F37D600BA4165 /* TurretMove.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A322973220F37D600BA4165 /* TurretMove.wav */; };
+		7A32297C220F37D600BA4165 /* TankShooting.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A322974220F37D600BA4165 /* TankShooting.wav */; };
 		7AA2F54A21E422580002331B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54921E422580002331B /* AppDelegate.swift */; };
 		7AA2F54C21E422580002331B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2F54B21E422580002331B /* GameScene.sks */; };
 		7AA2F55021E422580002331B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F54F21E422580002331B /* GameScene.swift */; };
@@ -98,6 +106,14 @@
 		7A3229632202A32E00BA4165 /* ObstacleSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleSprite.swift; sourceTree = "<group>"; };
 		7A3229652205F76000BA4165 /* FireBall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireBall.sks; sourceTree = "<group>"; };
 		7A3229682207B07C00BA4165 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7A32296D220F37D500BA4165 /* PowerupHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PowerupHit.wav; sourceTree = "<group>"; };
+		7A32296E220F37D500BA4165 /* TankHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TankHit.wav; sourceTree = "<group>"; };
+		7A32296F220F37D500BA4165 /* TankMove.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TankMove.wav; sourceTree = "<group>"; };
+		7A322970220F37D500BA4165 /* TurretHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TurretHit.wav; sourceTree = "<group>"; };
+		7A322971220F37D500BA4165 /* HitRock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = HitRock.wav; sourceTree = "<group>"; };
+		7A322972220F37D500BA4165 /* WoodHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WoodHit.wav; sourceTree = "<group>"; };
+		7A322973220F37D600BA4165 /* TurretMove.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TurretMove.wav; sourceTree = "<group>"; };
+		7A322974220F37D600BA4165 /* TankShooting.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TankShooting.wav; sourceTree = "<group>"; };
 		7AA2F54621E422580002331B /* Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2F54921E422580002331B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA2F54B21E422580002331B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -207,6 +223,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7A32296C220F37B600BA4165 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				7A322971220F37D500BA4165 /* HitRock.wav */,
+				7A32296D220F37D500BA4165 /* PowerupHit.wav */,
+				7A32296E220F37D500BA4165 /* TankHit.wav */,
+				7A32296F220F37D500BA4165 /* TankMove.wav */,
+				7A322974220F37D600BA4165 /* TankShooting.wav */,
+				7A322970220F37D500BA4165 /* TurretHit.wav */,
+				7A322973220F37D600BA4165 /* TurretMove.wav */,
+				7A322972220F37D500BA4165 /* WoodHit.wav */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		7AA2F53D21E422580002331B = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +261,7 @@
 		7AA2F54821E422580002331B /* Battle */ = {
 			isa = PBXGroup;
 			children = (
+				7A32296C220F37B600BA4165 /* Sound */,
 				7A32292721EA726D00BA4165 /* Resources */,
 				7AA2F58721E6579C0002331B /* Level */,
 				7AA2F54921E422580002331B /* AppDelegate.swift */,
@@ -412,20 +444,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A322975220F37D600BA4165 /* PowerupHit.wav in Resources */,
 				7A32293721F3902D00BA4165 /* TankDangerSmoke.sks in Resources */,
+				7A322979220F37D600BA4165 /* HitRock.wav in Resources */,
 				7A32293D21F5093100BA4165 /* TankDefeatedExplosion.sks in Resources */,
 				7A32292C21EAD46D00BA4165 /* TurretFired.sks in Resources */,
+				7A322978220F37D600BA4165 /* TurretHit.wav in Resources */,
 				7AA2F55521E422580002331B /* Main.storyboard in Resources */,
 				7A32292921EA728A00BA4165 /* ShotFired.sks in Resources */,
 				7AA2F54C21E422580002331B /* GameScene.sks in Resources */,
 				7A32292D21EAD46D00BA4165 /* Assets.xcassets in Resources */,
 				7A32295921FC04CB00BA4165 /* TurretHit.sks in Resources */,
+				7A32297B220F37D600BA4165 /* TurretMove.wav in Resources */,
 				7A3229662205F76000BA4165 /* FireBall.sks in Resources */,
+				7A322976220F37D600BA4165 /* TankHit.wav in Resources */,
+				7A32297A220F37D600BA4165 /* WoodHit.wav in Resources */,
+				7A322977220F37D600BA4165 /* TankMove.wav in Resources */,
 				7AA2F55721E422760002331B /* Assets.xcassets in Resources */,
 				7A32293921F3DFF200BA4165 /* TankHit.sks in Resources */,
 				7A32295B21FD240E00BA4165 /* DisappearSmoke.sks in Resources */,
 				7A32295521FAC47700BA4165 /* PowerupHit.sks in Resources */,
 				7AA2F55A21E422760002331B /* LaunchScreen.storyboard in Resources */,
+				7A32297C220F37D600BA4165 /* TankShooting.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
