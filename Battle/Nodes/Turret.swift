@@ -7,9 +7,11 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class Turret: SKSpriteNode {
     
+    private var musicPlayer = AVAudioPlayer()
     let turretHitSound = SKAction.playSoundFileNamed("TurretHit.wav", waitForCompletion: false)
     
     enum RotateDirection {
@@ -41,6 +43,21 @@ class Turret: SKSpriteNode {
         self.physicsBody?.friction = 0
         self.physicsBody?.restitution = 1
         self.physicsBody?.allowsRotation = true
+        
+        setupTurretMovingSound()
+    }
+    
+    private func setupTurretMovingSound() {
+        guard let turretMoveSoundPath = Bundle.main.path(forResource: "TurretMove.wav", ofType: nil) else { return }
+        let url = URL(fileURLWithPath: turretMoveSoundPath)
+        do {
+            musicPlayer = try AVAudioPlayer(contentsOf: url)
+            musicPlayer.numberOfLoops = -1
+            musicPlayer.prepareToPlay()
+        } catch {
+            print("couldn't load turret moving sound file")
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,7 +96,7 @@ class Turret: SKSpriteNode {
     }
     
     private func playTurretMovingSound() {
-
+        musicPlayer.play()
     }
     
     private func rotateLeft(toTarget target: CGFloat) {
@@ -124,6 +141,11 @@ class Turret: SKSpriteNode {
         canFire = false
         currentTarget = nil
         targetAcquiredHandler()
+        stopPlayingTurretMovingSound()
+    }
+    
+    private func stopPlayingTurretMovingSound() {
+        musicPlayer.stop()
     }
     
     public func fireExplosion() {
