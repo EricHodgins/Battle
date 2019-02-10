@@ -115,6 +115,7 @@ class Tank: SKSpriteNode {
             udpateStateForJustFired()
             self.run(tankShootingSound)
             if powerups.count > 0 {
+                playPowerupSound()
                 let powerup = powerups.removeFirst()
                 powerup.activate(tank: self, pointFiredAt: point, screenSize: screenSize)
                 didFireAtPoint.value = CGPoint.zero // Trigger TankAI to react
@@ -213,7 +214,7 @@ class Tank: SKSpriteNode {
     public func addPowerup(powerup: SKSpriteNode) {
         if lastPowerupNode != powerup {
             lastPowerupNode = powerup
-            self.run(powerupHitSound)
+            playPowerupSound()
             
             switch powerup.name {
             case PowerupType.tripleBullet.rawValue:
@@ -226,6 +227,10 @@ class Tank: SKSpriteNode {
                 return
             }
         }
+    }
+    
+    private func playPowerupSound() {
+        self.run(powerupHitSound)
     }
     
     private func tankHitExplosion(contact: SKPhysicsContact) {
