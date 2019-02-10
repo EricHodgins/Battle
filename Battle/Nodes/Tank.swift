@@ -12,6 +12,7 @@ class Tank: SKSpriteNode {
     static var enemyMovingSpeed: Double = 20
     let tankHitSound = SKAction.playSoundFileNamed("TankHit.wav", waitForCompletion: false)
     let tankShootingSound = SKAction.playSoundFileNamed("TankShooting.wav", waitForCompletion: false)
+    let powerupHitSound = SKAction.playSoundFileNamed("PowerupHit.wav", waitForCompletion: false)
     
     var initialSize: CGSize = CGSize(width: 66, height: 45)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
@@ -212,6 +213,8 @@ class Tank: SKSpriteNode {
     public func addPowerup(powerup: SKSpriteNode) {
         if lastPowerupNode != powerup {
             lastPowerupNode = powerup
+            self.run(powerupHitSound)
+            
             switch powerup.name {
             case PowerupType.tripleBullet.rawValue:
                 powerups.append(TripleBullet())
