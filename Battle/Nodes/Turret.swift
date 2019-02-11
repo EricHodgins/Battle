@@ -13,6 +13,7 @@ class Turret: SKSpriteNode {
     
     private var musicPlayer = AVAudioPlayer()
     let turretHitSound = SKAction.playSoundFileNamed("TurretHit.wav", waitForCompletion: false)
+    let turretShootSound = SKAction.playSoundFileNamed("TurretShooting.wav", waitForCompletion: false)
     
     enum RotateDirection {
         case left
@@ -160,6 +161,8 @@ class Turret: SKSpriteNode {
         self.run(delay) {
             explosion.removeFromParent()
         }
+        
+        self.run(turretShootSound)
     }
     
     public func hasBeenHit(contactPoint: CGPoint) {
