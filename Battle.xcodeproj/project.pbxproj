@@ -63,6 +63,8 @@
 		7AA2F58921E657BB0002331B /* LevelOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F58821E657BB0002331B /* LevelOne.swift */; };
 		7AA2F58B21E657D90002331B /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F58A21E657D90002331B /* Level.swift */; };
 		7AA2F58D21E676770002331B /* Turret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2F58C21E676770002331B /* Turret.swift */; };
+		7AC2A37C2210F41100FB55B0 /* TankMovingMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7AC2A37B2210F41100FB55B0 /* TankMovingMusic.wav */; };
+		7AC2A37E2210F41E00FB55B0 /* TurretShooting.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7AC2A37D2210F41E00FB55B0 /* TurretShooting.wav */; };
 		CC5B40F75C21EFAF3CF13633 /* Pods_Battle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95411390655389247C796D3F /* Pods_Battle.framework */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +141,8 @@
 		7AA2F58821E657BB0002331B /* LevelOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelOne.swift; sourceTree = "<group>"; };
 		7AA2F58A21E657D90002331B /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		7AA2F58C21E676770002331B /* Turret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turret.swift; sourceTree = "<group>"; };
+		7AC2A37B2210F41100FB55B0 /* TankMovingMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TankMovingMusic.wav; sourceTree = "<group>"; };
+		7AC2A37D2210F41E00FB55B0 /* TurretShooting.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TurretShooting.wav; sourceTree = "<group>"; };
 		95411390655389247C796D3F /* Pods_Battle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Battle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D90EB8490AB3FBC4C91B6DC0 /* Pods-BattleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BattleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BattleTests/Pods-BattleTests.release.xcconfig"; sourceTree = "<group>"; };
 		EF3D493367AC1E375923E2D5 /* Pods_BattleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BattleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +230,8 @@
 		7A32296C220F37B600BA4165 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				7AC2A37B2210F41100FB55B0 /* TankMovingMusic.wav */,
+				7AC2A37D2210F41E00FB55B0 /* TurretShooting.wav */,
 				7A322971220F37D500BA4165 /* HitRock.wav */,
 				7A32296D220F37D500BA4165 /* PowerupHit.wav */,
 				7A32296E220F37D500BA4165 /* TankHit.wav */,
@@ -453,11 +459,13 @@
 				7AA2F55521E422580002331B /* Main.storyboard in Resources */,
 				7A32292921EA728A00BA4165 /* ShotFired.sks in Resources */,
 				7AA2F54C21E422580002331B /* GameScene.sks in Resources */,
+				7AC2A37C2210F41100FB55B0 /* TankMovingMusic.wav in Resources */,
 				7A32292D21EAD46D00BA4165 /* Assets.xcassets in Resources */,
 				7A32295921FC04CB00BA4165 /* TurretHit.sks in Resources */,
 				7A32297B220F37D600BA4165 /* TurretMove.wav in Resources */,
 				7A3229662205F76000BA4165 /* FireBall.sks in Resources */,
 				7A322976220F37D600BA4165 /* TankHit.wav in Resources */,
+				7AC2A37E2210F41E00FB55B0 /* TurretShooting.wav in Resources */,
 				7A32297A220F37D600BA4165 /* WoodHit.wav in Resources */,
 				7A322977220F37D600BA4165 /* TankMove.wav in Resources */,
 				7AA2F55721E422760002331B /* Assets.xcassets in Resources */,

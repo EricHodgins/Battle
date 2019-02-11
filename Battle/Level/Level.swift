@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit.GKRandomSource
+import AVFoundation
 
 class Level {
     weak var gameScene: GameScene?
@@ -29,9 +30,25 @@ class Level {
     private var lastTankIsInMotionTimeInterval: TimeInterval = 0.0
     private var tankIsInMotionDuration: TimeInterval = 5.0
     
+    private var musicPlayer = AVAudioPlayer()
+    
     init(gameScene: GameScene) {
         self.gameScene = gameScene
         buildLevel()
+        setupTankMovingMusic()
+    }
+    
+    private func setupTankMovingMusic() {
+        guard let turretMoveSoundPath = Bundle.main.path(forResource: "TankMovingMusic.wav", ofType: nil) else { return }
+        let url = URL(fileURLWithPath: turretMoveSoundPath)
+        do {
+            musicPlayer = try AVAudioPlayer(contentsOf: url)
+            musicPlayer.numberOfLoops = -1
+            musicPlayer.prepareToPlay()
+        } catch {
+            print("couldn't load tank moving music moving sound file")
+        }
+        
     }
     
     public func getTurrets() -> [Turret] {
@@ -85,6 +102,7 @@ class Level {
         }
         
         if roundComplete {
+            musicPlayer.play()
             for turret in turrets {
                 addDisappearSmoke(atPosition: turret.position)
                 turret.removeFromParent()
@@ -123,6 +141,7 @@ class Level {
                 gamescene.reBuildEnemy()
                 
                 lastTankIsInMotionTimeInterval = 0.0
+                musicPlayer.stop()
             }
         }
     }
