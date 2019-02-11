@@ -28,7 +28,7 @@ class Level {
     private var round: Int = 0
     
     private var lastTankIsInMotionTimeInterval: TimeInterval = 0.0
-    private var tankIsInMotionDuration: TimeInterval = 5.0
+    private var tankIsInMotionDuration: TimeInterval = 45.0
     
     private var musicPlayer = AVAudioPlayer()
     

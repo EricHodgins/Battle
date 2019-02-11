@@ -31,6 +31,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let boundary = SKSpriteNode()
     
+    let woodHitSound = SKAction.playSoundFileNamed("WoodHit.wav", waitForCompletion: false)
+    
     override func didMove(to view: SKView) {
         build()
         backgroundColor = .black
@@ -398,6 +400,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.run(delay) {
             explosion.removeFromParent()
         }
+        
+        self.run(woodHitSound)
     }
     
     deinit {

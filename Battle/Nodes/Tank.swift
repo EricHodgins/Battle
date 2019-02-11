@@ -13,6 +13,7 @@ class Tank: SKSpriteNode {
     let tankHitSound = SKAction.playSoundFileNamed("TankHit.wav", waitForCompletion: false)
     let tankShootingSound = SKAction.playSoundFileNamed("TankShooting.wav", waitForCompletion: false)
     let powerupHitSound = SKAction.playSoundFileNamed("PowerupHit.wav", waitForCompletion: false)
+    let obstacleHitSound = SKAction.playSoundFileNamed("HitRock.wav", waitForCompletion: false)
     
     var initialSize: CGSize = CGSize(width: 66, height: 45)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "Tank")
@@ -192,6 +193,7 @@ class Tank: SKSpriteNode {
             self.physicsBody?.categoryBitMask = PhysicsCategory.tankRecoverMode.rawValue
             lastObstacle = obstacle
             updateHealth(contact: contact, completion: completion)
+            self.run(obstacleHitSound)
         }
     }
     
