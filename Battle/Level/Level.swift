@@ -55,6 +55,26 @@ class Level {
         return turrets
     }
     
+    public func getAllPowerUps() -> [PowerupSprite] {
+        guard let gamescene = gameScene else { return [] }
+        
+        var powerups: [PowerupSprite] = []
+        
+        gamescene.enumerateChildNodes(withName: PowerupType.tripleBullet.rawValue) { (node, _) in
+            powerups.append(node as! PowerupSprite)
+        }
+        
+        gamescene.enumerateChildNodes(withName: PowerupType.healthBoost.rawValue) { (node, _) in
+            powerups.append(node as! PowerupSprite)
+        }
+        
+        gamescene.enumerateChildNodes(withName: PowerupType.moveTurrets.rawValue) { (node, _) in
+            powerups.append(node as! PowerupSprite)
+        }
+        
+        return powerups
+    }
+    
     public func buildLevel() {
         guard let gameScene = self.gameScene else { fatalError() }
         round += 1
@@ -217,21 +237,11 @@ class Level {
     }
     
     public func removePowerups() {
-        guard let gamescene = gameScene else { return }
+        let powerups = self.getAllPowerUps()
         
-        gamescene.enumerateChildNodes(withName: PowerupType.tripleBullet.rawValue) { [unowned self] (node, _) in
-            self.addDisappearSmoke(atPosition: node.position)
-            node.removeFromParent()
-        }
-        
-        gamescene.enumerateChildNodes(withName: PowerupType.healthBoost.rawValue) { [unowned self] (node, _) in
-            self.addDisappearSmoke(atPosition: node.position)
-            node.removeFromParent()
-        }
-        
-        gamescene.enumerateChildNodes(withName: PowerupType.moveTurrets.rawValue) { [unowned self] (node, _) in
-            self.addDisappearSmoke(atPosition: node.position)
-            node.removeFromParent()
+        for i in 0 ..< powerups.count {
+            self.addDisappearSmoke(atPosition: powerups[i].position)
+            powerups[i].removeFromParent()
         }
     }
     

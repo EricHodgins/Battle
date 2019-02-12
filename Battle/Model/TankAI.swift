@@ -97,9 +97,9 @@ class TankAI {
             targets.append(target.position)
         }
 
-//        for powerup in level.getAllPowerUps() {
-//            targets.append(powerup.position)
-//        }
+        for powerup in level.getAllPowerUps() {
+            targets.append(powerup.position)
+        }
 
         targets.append(human.position)
 
