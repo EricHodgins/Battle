@@ -30,8 +30,8 @@ class GameViewController: UIViewController {
         
         let view = self.view as! SKView
         view.ignoresSiblingOrder = true
-        view.showsFPS = true
-        view.showsNodeCount = true
+        view.showsFPS = false
+        view.showsNodeCount = false
         
         menuScene.size = view.bounds.size
         view.presentScene(menuScene)
